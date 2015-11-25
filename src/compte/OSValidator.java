@@ -19,11 +19,11 @@ public class OSValidator {
     public String osTest() {
                 String result = new String();
 		if (isWindows()) {
-                    File AppData = new File("C:\\Users\\Fabien\\AppData\\Local");
+                    File AppData = new File("C:/Users/Fabien/AppData/Local");
                     if(AppData.exists()){
-                        File fb = new File("C:\\Users\\Fabien\\AppData\\Local\\Suivi Bancaire"); 
+                        File fb = new File("C:/Users/Fabien/AppData/Local/SuiviBancaire"); 
                         fb.mkdirs();
-                        result = "C:\\Users\\Fabien\\AppData\\Local\\Suivi Bancaire";
+                        result = "C:/Users/Fabien/AppData/Local/SuiviBancaire";
                     }
                     
                     return result;
