@@ -90,9 +90,14 @@ public class csv {
                     listComponent.addElement(file.getName());
                   }
             }
-            
-
-     
+           
      return listComponent;
     }
+   
+   public int FileCount(){
+       int result = 0;
+       File[] files = new File(view.urlRep).listFiles();
+       result = files.length;
+       return result;
+   }
 }
