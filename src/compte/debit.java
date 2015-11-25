@@ -17,7 +17,7 @@ import java.io.IOException;
  */
 public class debit extends javax.swing.JFrame {
 
-    /*test de poiro*/
+    
     csv csv = new csv();
     /**
      * Creates new form credit
