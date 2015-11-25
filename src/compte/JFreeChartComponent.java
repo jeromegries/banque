@@ -66,7 +66,7 @@ public class JFreeChartComponent {
             int lineNumber = 0;
 		while ((br.readLine()) != null) {   
                     String[] line = new csv().readCSV(view.url, lineNumber);
-                    graphChartData.setValue(Integer.parseInt(line[7]),line[4],line[5]);
+                    graphChartData.setValue(Integer.parseInt(line[7]),line[6],line[5]);
                     lineNumber++;
 		}
             
