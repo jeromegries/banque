@@ -82,7 +82,7 @@ public class csv {
    public DefaultComboBoxModel liste(){
        
        DefaultComboBoxModel listComponent = new DefaultComboBoxModel();
-       File[] files = new File("/home/jerome/SuiviBancaire").listFiles();
+       File[] files = new File(view.urlRep).listFiles();
         //If this pathname does not denote a directory, then listFiles() returns null. 
 
             for (File file : files) {

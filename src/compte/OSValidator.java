@@ -30,6 +30,7 @@ public class OSValidator {
 		} else if (isMac()) {
 			return "mac";
 		} else if (isUnix()) {
+                        System.out.println("On est sur un Unix");
                         File fb = new File("/home/jerome/SuiviBancaire"); 
                         fb.mkdirs();
                         result = "/home/jerome/SuiviBancaire";

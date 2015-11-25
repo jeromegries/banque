@@ -27,20 +27,20 @@ public class view extends javax.swing.JFrame {
     public view() {
         
         initComponents();
-        comboBox.setModel(csv.liste());
         
-         String g = comboBox.getSelectedItem().toString();
-         //System.out.println(g);
         
         OSValidator osTester = new OSValidator();
         urlRep = osTester.osTest();
+        
+        comboBox.setModel(csv.liste());
+        String g = comboBox.getSelectedItem().toString();
         
         url = urlRep+"/"+g;
         
         System.out.println(url);
         //System.out.println(urlRep);
 
-        /*
+        
         File testFile = new File(url);
         if(testFile.exists()){
             chartPanel.removeAll();
@@ -48,7 +48,7 @@ public class view extends javax.swing.JFrame {
             chartPanel.add(chart.GraphPanel(), BorderLayout.CENTER);
             chartPanel.validate();
         }
-        */
+        
        
         
 
