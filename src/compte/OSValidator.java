@@ -15,15 +15,17 @@ import java.io.File;
 public class OSValidator {
     
     private String OS = System.getProperty("os.name").toLowerCase();
+    private String username = System.getProperty("user.name");
+
     
-    public String osTest() {
+   public String osTest() {
                 String result = new String();
 		if (isWindows()) {
-                    File AppData = new File("C:/Users/Fabien/AppData/Local");
+                    File AppData = new File("C:/Users/"+username+"/AppData/Local");
                     if(AppData.exists()){
-                        File fb = new File("C:/Users/Fabien/AppData/Local/SuiviBancaire"); 
+                        File fb = new File("C:/Users/"+username+"/AppData/Local/SuiviBancaire"); 
                         fb.mkdirs();
-                        result = "C:/Users/Fabien/AppData/Local/SuiviBancaire";
+                        result = "C:/Users/"+username+"/AppData/Local/SuiviBancaire";
                     }
                     
                     return result;
@@ -31,9 +33,9 @@ public class OSValidator {
 			return "mac";
 		} else if (isUnix()) {
                         System.out.println("On est sur un Unix");
-                        File fb = new File("/home/jerome/SuiviBancaire"); 
+                        File fb = new File("/home/"+username+"/SuiviBancaire"); 
                         fb.mkdirs();
-                        result = "/home/jerome/SuiviBancaire";
+                        result = "/home/"+username+"/SuiviBancaire";
 			return result;
 		} else {
 			return "Your OS is not support!!";
