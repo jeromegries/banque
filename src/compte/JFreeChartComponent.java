@@ -43,7 +43,6 @@ public class JFreeChartComponent {
     
     public ChartPanel BarPanel()
     {
-        // Coucou2
         DefaultCategoryDataset barChartData = new DefaultCategoryDataset();
         
         barChartData.setValue(20000,"Contribution Amount", "January");
