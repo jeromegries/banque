@@ -28,18 +28,15 @@ public class view extends javax.swing.JFrame {
         
         initComponents();
         
-        
         OSValidator osTester = new OSValidator();
         urlRep = osTester.osTest();
         
         comboBox.setModel(csv.liste());
-        String g = comboBox.getSelectedItem().toString();
-        
-        url = urlRep+"/"+g;
-        
-        System.out.println(url);
-        //System.out.println(urlRep);
-
+        String g = new String();
+        if(csv.FileCount() != 0){
+            g = comboBox.getSelectedItem().toString();
+            url = urlRep+"/"+g;
+        }
         
         File testFile = new File(url);
         if(testFile.exists()){
