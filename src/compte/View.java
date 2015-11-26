@@ -62,6 +62,19 @@ public class View extends javax.swing.JFrame {
         
 
     }
+    
+    private void refresh(){
+        comboBox.setModel(csv.liste());
+        this.comboBox.repaint();
+        
+        File testFile = new File(url);
+        if(testFile.exists()){
+            chartPanel.removeAll();
+            chartPanel.setLayout(new BorderLayout());
+            chartPanel.add(chart.GraphPanel(), BorderLayout.CENTER);
+            chartPanel.validate();
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -108,7 +121,12 @@ public class View extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("Option 2");
+        jButton4.setText("Refresh");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("Option 1");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -299,6 +317,10 @@ public class View extends javax.swing.JFrame {
         url = urlRep+"/"+g;
         System.out.println(url);
     }//GEN-LAST:event_comboBoxActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+       this.refresh();
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     
     /**
