@@ -58,26 +58,7 @@ public class JFreeChartComponent {
         return barPanel;
     }
     
-    public ChartPanel GraphPanel()
-    {
-        /*
-        DefaultCategoryDataset graphChartData = new DefaultCategoryDataset();
-        try{
-            
-            BufferedReader br = new BufferedReader(new FileReader(View.url));
-            int lineNumber = 0;
-		while ((br.readLine()) != null) {   
-                    String[] line = new Csv().readCSV(View.url, lineNumber);
-                    graphChartData.setValue(Integer.parseInt(line[7]),line[6],line[5]);
-                    lineNumber++;
-		}
-            
-        }catch(Exception e){
-            return null;            // Always must return something
-        }
-        JFreeChart graphChart = ChartFactory.createLineChart("Graph Amount/Mounth","Monthly", "Contribution Amount", graphChartData);
-        */
-        
+    public ChartPanel GraphPanel(){        
         TimeSeries Amount = new TimeSeries("Contribution Amount", Day.class);
         try{
             
