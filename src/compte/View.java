@@ -288,14 +288,15 @@ public class View extends javax.swing.JFrame {
     }//GEN-LAST:event_mousedraggedMousePressed
 
     private void debitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_debitMouseClicked
-        new Debit().setVisible(true);
-        System.out.println("affichage debit");
+        Debit debit = new Debit();
+        debit.setVisible(true);
+        debit.addView(this);
     }//GEN-LAST:event_debitMouseClicked
 
     private void creditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_creditMouseClicked
-         new Credit().setVisible(true);
-         System.out.println("affichage credit");
-
+        Credit credit = new Credit(); 
+        credit.setVisible(true);
+        credit.addView(this);
     }//GEN-LAST:event_creditMouseClicked
 
     private void newCountMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newCountMouseClicked
@@ -316,7 +317,7 @@ public class View extends javax.swing.JFrame {
        String g = comboBox.getSelectedItem().toString();
         //System.out.println(g);
         url = urlRep+"/"+g;
-        System.out.println(url);
+        this.refresh();
     }//GEN-LAST:event_comboBoxActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed

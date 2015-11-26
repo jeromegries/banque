@@ -14,10 +14,12 @@ import java.io.IOException;
 public class NewCount extends javax.swing.JFrame {
 
     private View view;
+    private Csv csv = new Csv();
+    
     /**
      * Creates new form NewCount
      */
-    private Csv csv = new Csv();
+    
     
     public NewCount() {
         initComponents();

@@ -16,14 +16,18 @@ import java.io.IOException;
  * @author jerome
  */
 public class Credit extends javax.swing.JFrame {
-
-    Csv csv = new Csv();
+    private View view;
+    private Csv csv = new Csv();
     
     /**
      * Creates new form credit
      */
     public Credit() {
         initComponents();
+    }
+    
+    public void addView(View v){
+        this.view = v;
     }
 
     /**
@@ -216,7 +220,7 @@ public class Credit extends javax.swing.JFrame {
                 //System.out.println(path);
 
         setVisible(false);
-        
+        this.view.refresh();
     }//GEN-LAST:event_saveMouseClicked
 
     /**

@@ -17,12 +17,17 @@ import java.io.IOException;
  */
 public class Debit extends javax.swing.JFrame {
     
-    Csv csv = new Csv();
+    private View view;
+    private Csv csv = new Csv();
     /**
      * Creates new form credit
      */
     public Debit() {
         initComponents();
+    }
+    
+    public void addView(View v){
+        this.view = v;
     }
 
     /**
@@ -192,7 +197,7 @@ public class Debit extends javax.swing.JFrame {
 				e.printStackTrace();
 			}
         setVisible(false);
-        
+        this.view.refresh();
     }//GEN-LAST:event_saveMouseClicked
 
     /**
