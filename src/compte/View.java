@@ -41,14 +41,14 @@ public class View extends javax.swing.JFrame {
             g = comboBox.getSelectedItem().toString();
             url = urlRep+"/"+g;
         }
-        
+        /*
         try{
            
                 history.affichehistory();                             
              }catch(Exception e){
            }
-        //historique.
-        
+        historique.setText(history.affichehistory());
+        */
         
         File testFile = new File(url);
         if(testFile.exists()){
