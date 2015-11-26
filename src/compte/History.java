@@ -6,6 +6,7 @@
 package compte;
 
 import com.opencsv.CSVReader;
+import java.io.BufferedReader;
 import java.io.FileReader;
 
 
@@ -19,34 +20,44 @@ public class History {
     Csv csv = new Csv();
     
     
-    public  String[] affichehistory () throws Exception
-		{
-                int i=0;
-                
-                CSVReader reader = new CSVReader(new FileReader(View.url));
-    		String [] nextLine;
-                
-                //compter le nombre de lignes dans le fichier csv;
-                while ((nextLine = reader.readNext()) != null){ i=i+1;}
-                //stocker les lignes du csv dans un tableau
-                String[] result = new String[i];
-                
-                int c=0;
-                while ((nextLine = reader.readNext()) != null)
-                    {
-                   for(String valeur:nextLine){
-                   		System.out.print (valeur);
-                                //sauter une ligne
-                                
-                                System.out.println ();
-                                result[c]=valeur;
-                                c++;
-                        }    
-                        //return result;        
-    		    }
-                    return result;
+    public String[] affichehistory() throws Exception
+  	 {
+       //Compter le nombre de lignes du fichier
+       int i=0;
+       CSVReader reader = new CSVReader(new FileReader(View.url));
+       String [] nextLine;
+       while ((nextLine = reader.readNext()) != null){ i=i+1;}
+       
+        String[] history = new String[i];
+        int j =0;
+        
+        BufferedReader br = new BufferedReader(new FileReader(View.url));
+        String ligne = null;
+        
+        while ((ligne = br.readLine()) != null)
+         {
+                // Retourner la ligne dans un tableau
+                String[] data = ligne.split("\n");
+
+                // Afficher le contenu du tableau
+                for (String val : data)
+                {
+                  //System.out.println(val);
+                  history[j]=val;
+                  //System.out.println(history[j]);
+                  j++;
                 }
-}
+        }
+        
+        br.close();
+        return history;
+      }
+    
+        
+    }
+    
+
+
                        
  
         
