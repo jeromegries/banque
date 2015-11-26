@@ -13,6 +13,7 @@ import java.io.IOException;
  */
 public class NewCount extends javax.swing.JFrame {
 
+    private View view;
     /**
      * Creates new form NewCount
      */
@@ -20,6 +21,10 @@ public class NewCount extends javax.swing.JFrame {
     
     public NewCount() {
         initComponents();
+    }
+    
+    public void addView(View v){
+        this.view = v;
     }
 
     /**
@@ -156,7 +161,7 @@ public class NewCount extends javax.swing.JFrame {
 				e.printStackTrace();
 			}
         setVisible(false);
-        csv.liste();
+        this.view.refresh();
         
     }//GEN-LAST:event_saveMouseClicked
 

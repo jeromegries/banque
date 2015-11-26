@@ -63,7 +63,7 @@ public class View extends javax.swing.JFrame {
 
     }
     
-    private void refresh(){
+    public void refresh(){
         comboBox.setModel(csv.liste());
         this.comboBox.repaint();
         
@@ -299,8 +299,9 @@ public class View extends javax.swing.JFrame {
     }//GEN-LAST:event_creditMouseClicked
 
     private void newCountMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newCountMouseClicked
-       
-         new NewCount().setVisible(true);                 
+        NewCount newCount = new NewCount();
+        newCount.setVisible(true);
+        newCount.addView(this);
                             
     }//GEN-LAST:event_newCountMouseClicked
 
