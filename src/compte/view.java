@@ -23,6 +23,7 @@ public class view extends javax.swing.JFrame {
     //Url des fichiers csv
     public static String urlRep = new String();
     public static String url = new String();
+    // Fabien Coucou
     
     public view() {
         
