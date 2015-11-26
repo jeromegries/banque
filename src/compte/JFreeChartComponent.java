@@ -62,10 +62,10 @@ public class JFreeChartComponent {
         DefaultCategoryDataset graphChartData = new DefaultCategoryDataset();
         try{
             
-            BufferedReader br = new BufferedReader(new FileReader(view.url));
+            BufferedReader br = new BufferedReader(new FileReader(View.url));
             int lineNumber = 0;
 		while ((br.readLine()) != null) {   
-                    String[] line = new csv().readCSV(view.url, lineNumber);
+                    String[] line = new Csv().readCSV(View.url, lineNumber);
                     graphChartData.setValue(Integer.parseInt(line[7]),line[6],line[5]);
                     lineNumber++;
 		}
