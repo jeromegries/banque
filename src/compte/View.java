@@ -26,6 +26,7 @@ public class View extends javax.swing.JFrame {
     //Url des fichiers Csv
     public static String urlRep = new String();
     public static String url = new String();
+    private String ItemSelected = new String();
     
     
     public View() {
@@ -65,6 +66,13 @@ public class View extends javax.swing.JFrame {
     
     public void refresh(){
         comboBox.setModel(csv.liste());
+        int selectedIndex = 0;
+        for(int i = 0; i < comboBox.getItemCount(); i++){
+            if(comboBox.getItemAt(i).equalsIgnoreCase(ItemSelected)){
+                selectedIndex = i;
+            }
+        }
+        comboBox.setSelectedIndex(selectedIndex);
         this.comboBox.repaint();
         
         File testFile = new File(url);
@@ -314,9 +322,8 @@ public class View extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxActionPerformed
-       String g = comboBox.getSelectedItem().toString();
-        //System.out.println(g);
-        url = urlRep+"/"+g;
+        ItemSelected = comboBox.getSelectedItem().toString();
+        url = urlRep+"/"+ItemSelected;
         this.refresh();
     }//GEN-LAST:event_comboBoxActionPerformed
 
