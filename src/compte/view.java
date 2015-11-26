@@ -14,7 +14,7 @@ import java.io.File;
  * @author jerome
  */
 public class view extends javax.swing.JFrame {
-
+    //coucocu
     int xMouse;
     int yMouse;
     private csv csv = new csv();
@@ -115,7 +115,7 @@ public class view extends javax.swing.JFrame {
         );
         jInternalFrame2Layout.setVerticalGroup(
             jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 490, Short.MAX_VALUE)
+            .addGap(0, 494, Short.MAX_VALUE)
         );
 
         close.setIcon(new javax.swing.ImageIcon(getClass().getResource("/compte/pictures/delete86.png"))); // NOI18N
