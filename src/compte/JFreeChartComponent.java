@@ -24,9 +24,7 @@ package compte;
 
 import java.awt.Color;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -34,6 +32,9 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
+import org.jfree.data.time.Day;
+import org.jfree.data.time.TimeSeries;
+import org.jfree.data.time.TimeSeriesCollection;
 
 /**
  *
@@ -59,6 +60,7 @@ public class JFreeChartComponent {
     
     public ChartPanel GraphPanel()
     {
+        /*
         DefaultCategoryDataset graphChartData = new DefaultCategoryDataset();
         try{
             
@@ -73,15 +75,30 @@ public class JFreeChartComponent {
         }catch(Exception e){
             return null;            // Always must return something
         }
-        /*  Remplissage manuel du graphe
-        graphChartData.setValue(500, "2015", "January");
-        graphChartData.setValue(1500, "2015", "February");
-        graphChartData.setValue(1000, "2015", "March");
-        graphChartData.setValue(750, "2015", "April");
-        graphChartData.setValue(2000, "2015", "May");
-        */
         JFreeChart graphChart = ChartFactory.createLineChart("Graph Amount/Mounth","Monthly", "Contribution Amount", graphChartData);
-        ChartPanel graphPanel = new ChartPanel(graphChart);
+        */
+        
+        TimeSeries Amount = new TimeSeries("Contribution Amount", Day.class);
+        try{
+            
+            BufferedReader br = new BufferedReader(new FileReader(View.url));
+            int lineNumber = 0;
+		while ((br.readLine()) != null) {   
+                    String[] line = new Csv().readCSV(View.url, lineNumber);
+                    Amount.add(new Day(Integer.parseInt(line[4]), Integer.parseInt(line[5]), Integer.parseInt(line[6])), Integer.parseInt(line[7]));
+                    lineNumber++;
+		}
+            
+        }catch(Exception e){
+            return null;            // Always must return something
+        }
+        
+        TimeSeriesCollection dataset = new TimeSeriesCollection();
+        dataset.addSeries(Amount);
+        JFreeChart chart = ChartFactory.createTimeSeriesChart("Total Amount / Date","Date","Amount",dataset,true,true,false);
+        
+        ChartPanel graphPanel = new ChartPanel(chart);
+        graphPanel.setMouseZoomable(true, false);
         return graphPanel;
     }
     
