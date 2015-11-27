@@ -6,9 +6,9 @@
 package compte;
 
 import java.awt.BorderLayout;
-import java.io.BufferedReader;
+import java.awt.Panel;
+import java.awt.TextArea;
 import java.io.File;
-import java.io.FileReader;
 
 
 /**
@@ -57,6 +57,12 @@ public class View extends javax.swing.JFrame {
             chartPanel.setLayout(new BorderLayout());
             chartPanel.add(chart.GraphPanel(), BorderLayout.CENTER);
             chartPanel.validate();
+            /*
+            TextArea textArea = new TextArea();
+            Panel panel = new Panel();
+            panel.setLayout(new BorderLayout());
+            panel.add(textArea, BorderLayout.)
+            */
         }
         
        
