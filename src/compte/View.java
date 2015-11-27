@@ -48,10 +48,10 @@ public class View extends javax.swing.JFrame {
         
         
         try{
-                   
+
                     TextArea text = new TextArea();
                     text.setText(history.affichehistory());
-                    
+
                  
                  //historique.removeAll();
                  historique.setLayout(new BorderLayout());

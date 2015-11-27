@@ -29,7 +29,7 @@ public class History {
        CSVReader reader = new CSVReader(new FileReader(View.url));
        String [] nextLine;
        while ((nextLine = reader.readNext()) != null){ numberline=numberline+1;}
-      
+
        for(int i = 1; i<numberline; i++){
         
             String[] historyline = csv.readCSV(View.url, numberline-i);
