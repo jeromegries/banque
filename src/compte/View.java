@@ -49,14 +49,12 @@ public class View extends javax.swing.JFrame {
         
         try{
                    
-                    TextArea text = new TextArea();
-                    text.setText(history.affichehistory());
-                    
-                 
-                 //historique.removeAll();
-                 historique.setLayout(new BorderLayout());
-                 historique.add(text, BorderLayout.CENTER);
-                 historique.validate();
+            TextArea text = new TextArea();
+            text.setText(history.affichehistory());
+ 
+            historique.setLayout(new BorderLayout());
+            historique.add(text, BorderLayout.CENTER);
+            historique.validate();
              
              }catch(Exception e){
            }
@@ -90,19 +88,17 @@ public class View extends javax.swing.JFrame {
             chartPanel.setLayout(new BorderLayout());
             chartPanel.add(chart.GraphPanel(), BorderLayout.CENTER);
             chartPanel.validate();
-            
-          
+        }
         try{
-                    TextArea text = new TextArea();
-                    text.setText(history.affichehistory());
+            TextArea text = new TextArea();
+            text.setText(history.affichehistory());
                  
-                 historique.removeAll();
-                 historique.setLayout(new BorderLayout());
-                 historique.add(text, BorderLayout.CENTER);
-                 historique.validate();
+            historique.removeAll();
+            historique.setLayout(new BorderLayout());
+            historique.add(text, BorderLayout.CENTER);
+            historique.validate();
              
-             }catch(Exception e){
-           }
+        }catch(Exception e){
         }
     }
 
