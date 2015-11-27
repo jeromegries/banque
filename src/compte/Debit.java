@@ -165,7 +165,7 @@ public class Debit extends javax.swing.JFrame {
         debit[6] = year.getText();
         
         String[] total = new String[8];
-        System.out.println(debit[2]);
+        
         try{
             
             BufferedReader br = new BufferedReader(new FileReader(View.url));

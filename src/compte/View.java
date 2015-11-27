@@ -6,7 +6,9 @@
 package compte;
 
 import java.awt.BorderLayout;
-import java.awt.Panel;
+
+import java.awt.TextArea;
+import java.io.File;
 import java.awt.TextArea;
 import java.io.File;
 
@@ -42,14 +44,22 @@ public class View extends javax.swing.JFrame {
             g = comboBox.getSelectedItem().toString();
             url = urlRep+"/"+g;
         }
-        /*
+        
+        
+        
         try{
-           
-                history.affichehistory();                             
+                   
+                    TextArea text = new TextArea();
+                    text.setText(history.affichehistory());
+                    
+                 
+                 //historique.removeAll();
+                 historique.setLayout(new BorderLayout());
+                 historique.add(text, BorderLayout.CENTER);
+                 historique.validate();
+             
              }catch(Exception e){
            }
-        historique.setText(history.affichehistory());
-        */
         
         File testFile = new File(url);
         if(testFile.exists()){
@@ -57,18 +67,11 @@ public class View extends javax.swing.JFrame {
             chartPanel.setLayout(new BorderLayout());
             chartPanel.add(chart.GraphPanel(), BorderLayout.CENTER);
             chartPanel.validate();
-            /*
-            TextArea textArea = new TextArea();
-            Panel panel = new Panel();
-            panel.setLayout(new BorderLayout());
-            panel.add(textArea, BorderLayout.)
-            */
         }
         
+                
        
-        
-
-    }
+        }
     
     public void refresh(){
         comboBox.setModel(csv.liste());
@@ -87,6 +90,19 @@ public class View extends javax.swing.JFrame {
             chartPanel.setLayout(new BorderLayout());
             chartPanel.add(chart.GraphPanel(), BorderLayout.CENTER);
             chartPanel.validate();
+            
+          
+        try{
+                    TextArea text = new TextArea();
+                    text.setText(history.affichehistory());
+                 
+                 historique.removeAll();
+                 historique.setLayout(new BorderLayout());
+                 historique.add(text, BorderLayout.CENTER);
+                 historique.validate();
+             
+             }catch(Exception e){
+           }
         }
     }
 

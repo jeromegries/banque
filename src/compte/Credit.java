@@ -175,14 +175,8 @@ public class Credit extends javax.swing.JFrame {
         credit[4] = day.getText();
         credit[5] = month.getText();
         credit[6] = year.getText();
-        //credit[7] = year.getText();
-        //System.out.println(Credit[6]);
-
-        
+       
         String[] total = new String[8];
-        
-        System.out.println(View.url);
-
         
         try{
             
@@ -216,10 +210,7 @@ public class Credit extends javax.swing.JFrame {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-                //System.out.println(total[7]);
-                //System.out.println(path);
-
-        setVisible(false);
+         setVisible(false);
         this.view.refresh();
     }//GEN-LAST:event_saveMouseClicked
 

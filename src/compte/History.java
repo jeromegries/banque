@@ -17,40 +17,27 @@ import java.io.FileReader;
  */
 public class History {
     
-    Csv csv = new Csv();
+    private Csv csv = new Csv();
     
     
-    public String[] affichehistory() throws Exception
+    public String affichehistory() throws Exception
   	 {
        //Compter le nombre de lignes du fichier
-       int i=0;
+       String result = "";
+       int numberline=0;
+       
        CSVReader reader = new CSVReader(new FileReader(View.url));
        String [] nextLine;
-       while ((nextLine = reader.readNext()) != null){ i=i+1;}
+       while ((nextLine = reader.readNext()) != null){ numberline=numberline+1;}
+      
+       for(int i = 1; i<numberline; i++){
+        
+            String[] historyline = csv.readCSV(View.url, numberline-i);
+            result =result+historyline[4]+"/"+historyline[5]+"/"+historyline[6]+"       :"+historyline[2]+"\n"+historyline[1]+"\n_____________________________\n";
+                
+               }
        
-        String[] history = new String[i];
-        int j =0;
-        
-        BufferedReader br = new BufferedReader(new FileReader(View.url));
-        String ligne = null;
-        
-        while ((ligne = br.readLine()) != null)
-         {
-                // Retourner la ligne dans un tableau
-                String[] data = ligne.split("\n");
-
-                // Afficher le contenu du tableau
-                for (String val : data)
-                {
-                  //System.out.println(val);
-                  history[j]=val;
-                  //System.out.println(history[j]);
-                  j++;
-                }
-        }
-        
-        br.close();
-        return history;
+       return result;
       }
     
         
@@ -61,5 +48,4 @@ public class History {
                        
  
         
-
 

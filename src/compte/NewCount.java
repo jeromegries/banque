@@ -153,7 +153,7 @@ public class NewCount extends javax.swing.JFrame {
         credit[7] = amount.getText();
         
         String s = name.getText();
-        //System.out.println(name);
+       
          try {
     		  csv.newCount(s, credit);
     		} catch(IOException e) {
