@@ -18,7 +18,7 @@ import java.io.File;
  * @author jerome
  */
 public class View extends javax.swing.JFrame {
-    //coucocu
+    
     int xMouse;
     int yMouse;
     private Csv csv = new Csv();

@@ -17,6 +17,8 @@ import java.io.IOException;
  */
 public class Debit extends javax.swing.JFrame {
     
+    int xMouse;
+    int yMouse;
     private View view;
     private Csv csv = new Csv();
     /**
@@ -53,8 +55,12 @@ public class Debit extends javax.swing.JFrame {
         slash = new javax.swing.JLabel();
         year = new javax.swing.JTextField();
         cat = new javax.swing.JLabel();
+        minimize = new javax.swing.JLabel();
+        close = new javax.swing.JLabel();
+        mousedragged = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/compte/pictures/basic.png"))); // NOI18N
         save.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -85,6 +91,37 @@ public class Debit extends javax.swing.JFrame {
         slash.setText("/");
 
         cat.setText("Catégorie");
+
+        minimize.setIcon(new javax.swing.ImageIcon(getClass().getResource("/compte/pictures/down.png"))); // NOI18N
+        minimize.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        minimize.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                minimizeMouseClicked(evt);
+            }
+        });
+
+        close.setIcon(new javax.swing.ImageIcon(getClass().getResource("/compte/pictures/delete86.png"))); // NOI18N
+        close.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        close.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                closeMouseClicked(evt);
+            }
+        });
+
+        mousedragged.setBackground(new java.awt.Color(0, 0, 0));
+        mousedragged.setForeground(new java.awt.Color(102, 102, 102));
+        mousedragged.setCursor(new java.awt.Cursor(java.awt.Cursor.CROSSHAIR_CURSOR));
+        mousedragged.setOpaque(true);
+        mousedragged.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                mousedraggedMouseDragged(evt);
+            }
+        });
+        mousedragged.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                mousedraggedMousePressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -117,11 +154,21 @@ public class Debit extends javax.swing.JFrame {
                     .addComponent(amount)
                     .addComponent(name))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(mousedragged, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(minimize)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(close))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(close, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(minimize, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(mousedragged, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(description))
@@ -202,6 +249,26 @@ public class Debit extends javax.swing.JFrame {
         this.view.refresh();
     }//GEN-LAST:event_saveMouseClicked
 
+    private void minimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeMouseClicked
+        this.setState(ICONIFIED);// TODO add your handling code here:
+    }//GEN-LAST:event_minimizeMouseClicked
+
+    private void closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseClicked
+        System.exit(0);        // TODO add your handling code here:
+    }//GEN-LAST:event_closeMouseClicked
+
+    private void mousedraggedMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mousedraggedMouseDragged
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+
+        this.setLocation(x-xMouse, y-yMouse);
+    }//GEN-LAST:event_mousedraggedMouseDragged
+
+    private void mousedraggedMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mousedraggedMousePressed
+        xMouse = evt.getX();
+        yMouse = evt.getY();
+    }//GEN-LAST:event_mousedraggedMousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -245,11 +312,14 @@ public class Debit extends javax.swing.JFrame {
     private javax.swing.JLabel cancel;
     private javax.swing.JLabel cat;
     private javax.swing.JTextField categorie;
+    private javax.swing.JLabel close;
     private javax.swing.JLabel date;
     private javax.swing.JTextField day;
     private javax.swing.JLabel description;
+    private javax.swing.JLabel minimize;
     private javax.swing.JLabel montant;
     private javax.swing.JTextField month;
+    private javax.swing.JLabel mousedragged;
     private javax.swing.JTextField name;
     private javax.swing.JLabel save;
     private javax.swing.JLabel slash;
