@@ -45,7 +45,19 @@ public class View extends javax.swing.JFrame {
             url = urlRep+"/"+g;
         }
         
-        
+        /*
+        try{
+                   
+            TextArea texttotal = new TextArea();
+            texttotal.setText(history.total());
+            
+            total.setLayout(new BorderLayout());
+            total.add(texttotal, BorderLayout.CENTER);
+            total.validate();
+             
+             }catch(Exception e){
+           }
+        */
         
         try{
                    
@@ -58,6 +70,7 @@ public class View extends javax.swing.JFrame {
              
              }catch(Exception e){
            }
+        
         
         File testFile = new File(url);
         if(testFile.exists()){
@@ -72,6 +85,7 @@ public class View extends javax.swing.JFrame {
         }
     
     public void refresh(){
+        
         comboBox.setModel(csv.liste());
         int selectedIndex = 0;
         for(int i = 0; i < comboBox.getItemCount(); i++){
@@ -100,6 +114,7 @@ public class View extends javax.swing.JFrame {
              
         }catch(Exception e){
         }
+        
     }
 
     /**
@@ -123,6 +138,8 @@ public class View extends javax.swing.JFrame {
         chartPanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         historique = new javax.swing.JTextArea();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        total = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
@@ -221,6 +238,10 @@ public class View extends javax.swing.JFrame {
         historique.setRows(5);
         jScrollPane2.setViewportView(historique);
 
+        total.setColumns(20);
+        total.setRows(5);
+        jScrollPane1.setViewportView(total);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -231,17 +252,20 @@ public class View extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(newCount)
-                                    .addGap(31, 31, 31)
-                                    .addComponent(comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(credit)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(debit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(credit)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(debit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(newCount)
+                                        .addGap(31, 31, 31)
+                                        .addComponent(comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 6, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton5)
@@ -271,15 +295,18 @@ public class View extends javax.swing.JFrame {
                     .addComponent(chartPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(37, 37, 37)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton5)
-                            .addComponent(jButton4))
-                        .addComponent(credit))
-                    .addComponent(debit))
+                            .addComponent(jButton4)))
+                    .addComponent(debit, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(credit))
                 .addGap(73, 73, 73))
         );
 
@@ -395,9 +422,11 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JTextArea historique;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel minimize;
     private javax.swing.JLabel mousedragged;
     private javax.swing.JButton newCount;
+    private javax.swing.JTextArea total;
     // End of variables declaration//GEN-END:variables
 }
