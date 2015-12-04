@@ -192,7 +192,7 @@ public class View extends javax.swing.JFrame {
             }
         });
 
-        debit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/compte/pictures/sub74.png"))); // NOI18N
+        debit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/compte/pictures/sub32.png"))); // NOI18N
         debit.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 debitMouseClicked(evt);
@@ -313,12 +313,6 @@ public class View extends javax.swing.JFrame {
         
     }//GEN-LAST:event_mousedraggedMousePressed
 
-    private void debitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_debitMouseClicked
-        Debit debit = new Debit();
-        debit.setVisible(true);
-        debit.addView(this);
-    }//GEN-LAST:event_debitMouseClicked
-
     private void creditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_creditMouseClicked
         Credit credit = new Credit(); 
         credit.setVisible(true);
@@ -348,6 +342,12 @@ public class View extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
        this.refresh();
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void debitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_debitMouseClicked
+        Debit debit = new Debit();
+        debit.setVisible(true);
+        debit.addView(this);
+    }//GEN-LAST:event_debitMouseClicked
 
     
     /**
