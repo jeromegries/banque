@@ -46,7 +46,6 @@ public class Credit extends javax.swing.JFrame {
         cancel = new javax.swing.JLabel();
         name = new javax.swing.JTextField();
         amount = new javax.swing.JTextField();
-        categorie = new javax.swing.JTextField();
         day = new javax.swing.JTextField();
         description = new javax.swing.JLabel();
         montant = new javax.swing.JLabel();
@@ -59,6 +58,7 @@ public class Credit extends javax.swing.JFrame {
         minimize = new javax.swing.JLabel();
         close = new javax.swing.JLabel();
         mousedragged = new javax.swing.JLabel();
+        category = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -129,6 +129,8 @@ public class Credit extends javax.swing.JFrame {
             }
         });
 
+        category.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Logement / Chauffage / Eclairage", "Transport", "Alimentation", "Loisirs / Culture", "Mobiliers", "Habillements", "Santé", "Communication", "Education" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -152,13 +154,13 @@ public class Credit extends javax.swing.JFrame {
                         .addComponent(slash)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(year, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE))
-                    .addComponent(categorie)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(save)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(cancel))
                     .addComponent(amount)
-                    .addComponent(name))
+                    .addComponent(name)
+                    .addComponent(category, 0, 128, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(mousedragged, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -184,10 +186,10 @@ public class Credit extends javax.swing.JFrame {
                     .addComponent(amount, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(montant))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cat)
-                    .addComponent(categorie, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(category, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(slash0, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(slash, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -195,7 +197,7 @@ public class Credit extends javax.swing.JFrame {
                     .addComponent(month, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(day, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(date))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(save, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(cancel, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -219,7 +221,7 @@ public class Credit extends javax.swing.JFrame {
         credit[0] = "credit";
         credit[1] = name.getText();
         credit[2] = amount.getText();
-        credit[3] = categorie.getText();
+        credit[3] = category.getSelectedItem().toString();
         credit[4] = day.getText();
         credit[5] = month.getText();
         credit[6] = year.getText();
@@ -328,7 +330,7 @@ public class Credit extends javax.swing.JFrame {
     private javax.swing.JTextField amount;
     private javax.swing.JLabel cancel;
     private javax.swing.JLabel cat;
-    private javax.swing.JTextField categorie;
+    private javax.swing.JComboBox<String> category;
     private javax.swing.JLabel close;
     private javax.swing.JLabel date;
     private javax.swing.JTextField day;
