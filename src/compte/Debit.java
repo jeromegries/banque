@@ -123,7 +123,7 @@ public class Debit extends javax.swing.JFrame {
             }
         });
 
-        category.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Logement / Chauffage / Eclairage", "Transport", "Alimentation", "Loisirs / Culture", "Mobiliers", "Habillements", "Santé", "Communication", "Education" }));
+        category.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Logement / Chauffage / Eclairage", "Transport", "Alimentation", "Loisirs / Culture", "Mobiliers", "Habillements", "Santé", "Communication", "Education", "Autre" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

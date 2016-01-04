@@ -87,11 +87,125 @@ public class JFreeChartComponent {
     {
         DefaultPieDataset pieChartData = new DefaultPieDataset();
         
-        pieChartData.setValue("Loisir", 150);
-        pieChartData.setValue("Logement", 500);
-        pieChartData.setValue("Nourriture", 200);
-        pieChartData.setValue("Transport", 50);
-        pieChartData.setValue("Autre", 75);
+        int categoriesAmount[] = new int[10];
+        
+        try{
+            
+            BufferedReader br = new BufferedReader(new FileReader(View.url));
+            int lineNumber = 0;
+		while ((br.readLine()) != null) {   
+                    String[] line = new Csv().readCSV(View.url, lineNumber);
+                    switch(line[3]) {
+                        case "Logement / Chauffage / Eclairage":
+                            if("debit".equals(line[0]))
+                            {
+                                categoriesAmount[0] = categoriesAmount[0] + Integer.parseInt(line[2]);
+                            }else
+                            {
+                                System.out.println("Erreur de saisie dans le fichier csv de type credit/debit");
+                            };
+                        break;
+                        case "Transport":
+                            if("debit".equals(line[0]))
+                            {
+                                categoriesAmount[1] = categoriesAmount[1] + Integer.parseInt(line[2]);
+                            }else
+                            {
+                                System.out.println("Erreur de saisie dans le fichier csv de type credit/debit");
+                            };
+                        break;
+                        case "Alimentation":
+                            if("debit".equals(line[0]))
+                            {
+                                categoriesAmount[2] = categoriesAmount[2] + Integer.parseInt(line[2]);
+                            }else
+                            {
+                                System.out.println("Erreur de saisie dans le fichier csv de type credit/debit");
+                            };
+                        break;
+                        case "Loisirs / Culture":
+                            if("debit".equals(line[0]))
+                            {
+                                categoriesAmount[3] = categoriesAmount[3] + Integer.parseInt(line[2]);
+                            }else
+                            {
+                                System.out.println("Erreur de saisie dans le fichier csv de type credit/debit");
+                            };
+                        break;
+                        case "Mobiliers":
+                            if("debit".equals(line[0]))
+                            {
+                                categoriesAmount[4] = categoriesAmount[4] + Integer.parseInt(line[2]);
+                            }else
+                            {
+                                System.out.println("Erreur de saisie dans le fichier csv de type credit/debit");
+                            };
+                        break;
+                        case "Habillements":
+                            if("debit".equals(line[0]))
+                            {
+                                categoriesAmount[5] = categoriesAmount[5] + Integer.parseInt(line[2]);
+                            }else
+                            {
+                                System.out.println("Erreur de saisie dans le fichier csv de type credit/debit");
+                            };
+                        break;
+                        case "Santé":
+                            if("debit".equals(line[0]))
+                            {
+                                categoriesAmount[6] = categoriesAmount[6] + Integer.parseInt(line[2]);
+                            }else
+                            {
+                                System.out.println("Erreur de saisie dans le fichier csv de type credit/debit");
+                            };
+                        break;
+                        case "Communication":
+                            if("debit".equals(line[0]))
+                            {
+                                categoriesAmount[7] = categoriesAmount[7] + Integer.parseInt(line[2]);
+                            }else
+                            {
+                                System.out.println("Erreur de saisie dans le fichier csv de type credit/debit");
+                            };
+                        break;
+                        case "Education":
+                            if("debit".equals(line[0]))
+                            {
+                                categoriesAmount[8] = categoriesAmount[8] + Integer.parseInt(line[2]);
+                            }else
+                            {
+                                System.out.println("Erreur de saisie dans le fichier csv de type credit/debit");
+                            };
+                        break;
+                        case "Autre":
+                            if("debit".equals(line[0]))
+                            {
+                                categoriesAmount[9] = categoriesAmount[9] + Integer.parseInt(line[2]);
+                            }else
+                            {
+                                System.out.println("Erreur de saisie dans le fichier csv de type credit/debit");
+                            };
+                        break;
+                        default:
+                            System.out.println("Erreur de saisie dans le fichier csv de type catégorie");
+                    }
+                    lineNumber++;
+		}
+            
+        }catch(Exception e){
+            return null;            // Always must return something
+        }
+        
+        pieChartData.setValue("Logement / Chauffage / Eclairage", categoriesAmount[0]);
+        pieChartData.setValue("Transport", categoriesAmount[1]);
+        pieChartData.setValue("Alimentation", categoriesAmount[2]);
+        pieChartData.setValue("Loisirs / Culture", categoriesAmount[3]);
+        pieChartData.setValue("Mobiliers", categoriesAmount[4]);
+        pieChartData.setValue("Habillements", categoriesAmount[5]);
+        pieChartData.setValue("Santé", categoriesAmount[6]);
+        pieChartData.setValue("Communication", categoriesAmount[7]);
+        pieChartData.setValue("Education", categoriesAmount[8]);
+        pieChartData.setValue("Autre", categoriesAmount[9]);
         
         JFreeChart pieChart = ChartFactory.createPieChart("Expense/Category", pieChartData);
         ChartPanel piePanel = new ChartPanel(pieChart);
