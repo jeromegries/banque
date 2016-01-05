@@ -69,7 +69,7 @@ public class JFreeChartComponent {
                     Amount.add(new Day(Integer.parseInt(line[4]), Integer.parseInt(line[5]), Integer.parseInt(line[6])), Integer.parseInt(line[7]));
                     lineNumber++;
 		}
-            
+            br.close();
         }catch(Exception e){
             return null;            // Always must return something
         }
@@ -191,7 +191,7 @@ public class JFreeChartComponent {
                     }
                     lineNumber++;
 		}
-            
+            br.close();
         }catch(Exception e){
             return null;            // Always must return something
         }

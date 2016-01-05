@@ -54,16 +54,15 @@ public class Csv {
         String[] result = new String[8];
 
 	try {
-
-		br = new BufferedReader(new FileReader(path));
-                int lineNumber = 0;
-		while ((line = br.readLine()) != null) {
-		        if(lineNumber == i){
-                            result = line.split(cvsSplitBy);
-                        }
-                        lineNumber++;
-		}
-
+            br = new BufferedReader(new FileReader(path));
+            int lineNumber = 0;
+            while ((line = br.readLine()) != null) {
+	        if(lineNumber == i){
+                    result = line.split(cvsSplitBy);
+                }
+                    lineNumber++;
+            }
+            br.close();
 	} catch (FileNotFoundException e) {
 		e.printStackTrace();
 	} catch (IOException e) {
@@ -107,6 +106,7 @@ public class Csv {
             while ((br.readLine()) != null) {
                lineNumber++;
             }
+            br.close();
         }catch(Exception ex){
             
         }

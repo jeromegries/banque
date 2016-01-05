@@ -45,21 +45,30 @@ public class View extends javax.swing.JFrame {
         if(csv.FileCount() != 0){
             g = comboBox.getSelectedItem().toString();
             url = urlRep+"/"+g;
+            String total = "";
+            try{
+
+                BufferedReader br = new BufferedReader(new FileReader(View.url));
+                int lineNumber = 0;
+                while ((br.readLine()) != null) {   
+                    String[] line = new Csv().readCSV(View.url, lineNumber);
+                    total = line[7];
+                    lineNumber++;
+                }
+                br.close();
+
+            }catch(Exception e){
+                System.out.println(e);            // Always must return something
+            }
+            totalLabel.setText(total);
+            Font font = new Font("Arial",Font.BOLD,40);
+            totalLabel.setFont(font);
+            if(Integer.parseInt(total) >= 0){
+                totalLabel.setForeground(Color.green);
+            }else{
+                totalLabel.setForeground(Color.red); 
+            }
         }
-        
-        /*
-        try{
-                   
-            TextArea texttotal = new TextArea();
-            texttotal.setText(history.total());
-            
-            total.setLayout(new BorderLayout());
-            total.add(texttotal, BorderLayout.CENTER);
-            total.validate();
-             
-             }catch(Exception e){
-           }
-        */
         
         try{
                    
@@ -80,89 +89,78 @@ public class View extends javax.swing.JFrame {
             chartPanel.setLayout(new BorderLayout());
             chartPanel.add(chart.GraphPanel(), BorderLayout.CENTER);
             chartPanel.validate();
-        }
-        
-        String total = "";
-        try{
-            
-            BufferedReader br = new BufferedReader(new FileReader(View.url));
-            int lineNumber = 0;
-		while ((br.readLine()) != null) {   
-                    String[] line = new Csv().readCSV(View.url, lineNumber);
-                    total = line[7];
-                    lineNumber++;
-		}
-            
-        }catch(Exception e){
-            System.out.println(e);            // Always must return something
-        }
-        totalLabel.setText(total);
-        Font font = new Font("Arial",Font.BOLD,40);
-        totalLabel.setFont(font);
-        if(Integer.parseInt(total) >= 0){
-            totalLabel.setForeground(Color.green);
-        }else{
-            totalLabel.setForeground(Color.red); 
-        }
-        
+        }      
                 
        
         }
     
     public void refresh(){
-        
-        comboBox.setModel(csv.liste());
-        int selectedIndex = 0;
-        for(int i = 0; i < comboBox.getItemCount(); i++){
-            if(comboBox.getItemAt(i).equalsIgnoreCase(ItemSelected)){
-                selectedIndex = i;
+        if(csv.FileCount() == 0){
+            System.out.println("On est rentré dans le refresh, puis dans la boucle traitant les cas sans fichier de compte");
+            comboBox.setModel(csv.liste());
+            
+            chartPanel.removeAll();
+            
+            historique.removeAll();
+            
+            totalLabel.setText("");
+        }else{
+            comboBox.setModel(csv.liste());
+            int selectedIndex = 0;
+            for(int i = 0; i < comboBox.getItemCount(); i++){
+                if(comboBox.getItemAt(i).equalsIgnoreCase(ItemSelected)){
+                    selectedIndex = i;
+                }
+            }
+            File testFile = new File(url);
+
+            comboBox.setSelectedIndex(selectedIndex);
+            this.comboBox.repaint();
+
+            if(testFile.exists()){
+                chartPanel.removeAll();
+                chartPanel.setLayout(new BorderLayout());
+                chartPanel.add(chart.GraphPanel(), BorderLayout.CENTER);
+                chartPanel.validate();
+
+                try{
+                TextArea text = new TextArea();
+                text.setText(history.affichehistory());
+
+                historique.removeAll();
+                historique.setLayout(new BorderLayout());
+                historique.add(text, BorderLayout.CENTER);
+                historique.validate();
+
+                }catch(Exception e){
+                }
+
+                // On S'occupe de l'affichage du Total en couleur
+                String total = "";
+                try{
+
+                    BufferedReader br = new BufferedReader(new FileReader(View.url));
+                    int lineNumber = 0;
+                    while ((br.readLine()) != null) {   
+                        String[] line = new Csv().readCSV(View.url, lineNumber);
+                        total = line[7];
+                        lineNumber++;
+                    }
+                    br.close();
+                }catch(Exception e){
+                    System.out.println(e);
+                }
+                totalLabel.setText(total);
+                Font font = new Font("Arial",Font.BOLD,40);
+                totalLabel.setFont(font);
+                if(Integer.parseInt(total) >= 0){
+                    totalLabel.setForeground(Color.green);
+                }else{
+                    totalLabel.setForeground(Color.red); 
+                }
             }
         }
-        comboBox.setSelectedIndex(selectedIndex);
-        this.comboBox.repaint();
-        
-        File testFile = new File(url);
-        if(testFile.exists()){
-            chartPanel.removeAll();
-            chartPanel.setLayout(new BorderLayout());
-            chartPanel.add(chart.GraphPanel(), BorderLayout.CENTER);
-            chartPanel.validate();
-        }
-        try{
-            TextArea text = new TextArea();
-            text.setText(history.affichehistory());
-                 
-            historique.removeAll();
-            historique.setLayout(new BorderLayout());
-            historique.add(text, BorderLayout.CENTER);
-            historique.validate();
-             
-        }catch(Exception e){
-        }
-        String total = "";
-        try{
-            
-            BufferedReader br = new BufferedReader(new FileReader(View.url));
-            int lineNumber = 0;
-		while ((br.readLine()) != null) {   
-                    String[] line = new Csv().readCSV(View.url, lineNumber);
-                    total = line[7];
-                    lineNumber++;
-		}
-            
-        }catch(Exception e){
-            System.out.println(e);            // Always must return something
-        }
-        totalLabel.setText(total);
-        Font font = new Font("Arial",Font.BOLD,40);
-        totalLabel.setFont(font);
-        if(Integer.parseInt(total) >= 0){
-            totalLabel.setForeground(Color.green);
-        }else{
-            totalLabel.setForeground(Color.red); 
-        }     
-        
-        
+                
     }
 
     /**
@@ -187,9 +185,11 @@ public class View extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         historique = new javax.swing.JTextArea();
         totalLabel = new javax.swing.JLabel();
+        jToggleButton1 = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
+        setBounds(new java.awt.Rectangle(0, 0, 0, 0));
         setUndecorated(true);
 
         comboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -274,7 +274,7 @@ public class View extends javax.swing.JFrame {
         chartPanel.setLayout(chartPanelLayout);
         chartPanelLayout.setHorizontalGroup(
             chartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 745, Short.MAX_VALUE)
+            .addGap(0, 800, Short.MAX_VALUE)
         );
         chartPanelLayout.setVerticalGroup(
             chartPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -286,6 +286,13 @@ public class View extends javax.swing.JFrame {
         jScrollPane2.setViewportView(historique);
 
         totalLabel.setText("jLabel1");
+
+        jToggleButton1.setText("Supprimer");
+        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -300,30 +307,29 @@ public class View extends javax.swing.JFrame {
                                 .addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(credit)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(debit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(newCount)
-                                                .addGap(31, 31, 31)
-                                                .addComponent(comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(0, 6, Short.MAX_VALUE)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                                        .addComponent(newCount)
+                                        .addGap(31, 31, 31)
+                                        .addComponent(comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                            .addComponent(credit)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(debit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(87, 87, 87)
-                                .addComponent(totalLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(totalLabel)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jToggleButton1, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton5)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton4)
-                                .addGap(61, 61, 61))
-                            .addComponent(chartPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(229, 229, 229)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jButton5)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jButton4))
+                                    .addComponent(chartPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(174, 174, 174)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(minimize)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -339,7 +345,8 @@ public class View extends javax.swing.JFrame {
                 .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(newCount)
-                    .addComponent(comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jToggleButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(chartPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -350,13 +357,12 @@ public class View extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(7, 7, 7)
+                    .addComponent(credit)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(debit)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton5)
-                            .addComponent(jButton4)))
-                    .addComponent(debit, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(credit))
+                            .addComponent(jButton4))))
                 .addGap(73, 73, 73))
         );
 
@@ -426,6 +432,17 @@ public class View extends javax.swing.JFrame {
         debit.addView(this);
     }//GEN-LAST:event_debitMouseClicked
 
+    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+        File account = new File(url);
+        System.out.println(account.isFile());
+        while(account.isFile()){
+            account.delete();
+            System.out.println("ça ne marche pas !!!!!");
+        }
+        System.out.println(account.isFile());
+        this.refresh();
+    }//GEN-LAST:event_jToggleButton1ActionPerformed
+
     
     /**
      * @param args the command line arguments
@@ -473,6 +490,7 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JLabel minimize;
     private javax.swing.JLabel mousedragged;
     private javax.swing.JButton newCount;

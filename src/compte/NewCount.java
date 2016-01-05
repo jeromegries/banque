@@ -228,7 +228,7 @@ public class NewCount extends javax.swing.JFrame {
     }//GEN-LAST:event_minimizeMouseClicked
 
     private void closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseClicked
-        System.exit(0);        // TODO add your handling code here:
+        this.setVisible(false);
     }//GEN-LAST:event_closeMouseClicked
 
     private void mousedraggedMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mousedraggedMouseDragged

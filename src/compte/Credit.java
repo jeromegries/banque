@@ -232,12 +232,11 @@ public class Credit extends javax.swing.JFrame {
             
             BufferedReader br = new BufferedReader(new FileReader(View.url));
             int lineNumber = 0;
-		while ((br.readLine()) != null) {   
-                     total = new Csv().readCSV(View.url, lineNumber);
-                            
-
-                     lineNumber++;
-		}
+            while ((br.readLine()) != null) {   
+                total = new Csv().readCSV(View.url, lineNumber);                 
+                lineNumber++;
+            }
+            br.close();
                                            
 
             
@@ -269,7 +268,7 @@ public class Credit extends javax.swing.JFrame {
     }//GEN-LAST:event_minimizeMouseClicked
 
     private void closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseClicked
-        System.exit(0);        // TODO add your handling code here:
+        this.setVisible(false);
     }//GEN-LAST:event_closeMouseClicked
 
     private void mousedraggedMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mousedraggedMouseDragged

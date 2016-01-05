@@ -45,7 +45,7 @@ public class History {
             result = result+" "+historyline[4]+"/"+historyline[5]+"/"+historyline[6]+"       :"+amount+"\n"+" "+historyline[1]+"\n_________________________\n";
                 
                }
-       
+       reader.close();
        return result;
       }
         
