@@ -193,7 +193,7 @@ public class NewCount extends javax.swing.JFrame {
         String [] credit = new String[8];
         credit[0] = "credit";
         credit[1]="";
-        credit[2]="0";
+        credit[2]= amount.getText();
         credit[3]="";
         credit[4] = day.getText();
         credit[5] = month.getText();
