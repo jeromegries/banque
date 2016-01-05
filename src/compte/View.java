@@ -211,14 +211,14 @@ public class View extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("Refresh");
+        jButton4.setText("Graphique");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
             }
         });
 
-        jButton5.setText("Option 1");
+        jButton5.setText("Diagramme Circulaire");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -284,8 +284,6 @@ public class View extends javax.swing.JFrame {
         historique.setColumns(20);
         historique.setRows(5);
         jScrollPane2.setViewportView(historique);
-
-        totalLabel.setText("jLabel1");
 
         jToggleButton1.setText("Supprimer");
         jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -434,12 +432,9 @@ public class View extends javax.swing.JFrame {
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         File account = new File(url);
-        System.out.println(account.isFile());
         while(account.isFile()){
             account.delete();
-            System.out.println("ça ne marche pas !!!!!");
         }
-        System.out.println(account.isFile());
         this.refresh();
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 

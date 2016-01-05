@@ -66,6 +66,13 @@ public class JFreeChartComponent {
             int lineNumber = 0;
 		while ((br.readLine()) != null) {   
                     String[] line = new Csv().readCSV(View.url, lineNumber);
+                    
+                    // On compare les dates existantes avec celle qui l'on souhaite rajouter.
+                    // 
+                    if(Amount.getTimePeriods().contains( new Day(Integer.parseInt(line[4]), Integer.parseInt(line[5]), Integer.parseInt(line[6])))){   
+                        Amount.delete(new Day(Integer.parseInt(line[4]), Integer.parseInt(line[5]), Integer.parseInt(line[6])));
+                    }
+                    
                     Amount.add(new Day(Integer.parseInt(line[4]), Integer.parseInt(line[5]), Integer.parseInt(line[6])), Integer.parseInt(line[7]));
                     lineNumber++;
 		}
