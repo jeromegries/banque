@@ -8,13 +8,11 @@ package compte;
 import java.awt.BorderLayout;
 import java.awt.Color;
 
-import java.awt.TextArea;
-import java.io.File;
+import java.awt.Font;
 import java.awt.TextArea;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-import org.jfree.data.time.Day;
 
 
 /**
@@ -84,10 +82,27 @@ public class View extends javax.swing.JFrame {
             chartPanel.validate();
         }
         
+        String total = "";
         try{
-            String[] lastLine = csv.readCSV(View.url, csv.FileCount());
-            totalArea.setText(lastLine[7]);
-        }catch (Exception ex) {
+            
+            BufferedReader br = new BufferedReader(new FileReader(View.url));
+            int lineNumber = 0;
+		while ((br.readLine()) != null) {   
+                    String[] line = new Csv().readCSV(View.url, lineNumber);
+                    total = line[7];
+                    lineNumber++;
+		}
+            
+        }catch(Exception e){
+            System.out.println(e);            // Always must return something
+        }
+        totalLabel.setText(total);
+        Font font = new Font("Arial",Font.BOLD,40);
+        totalLabel.setFont(font);
+        if(Integer.parseInt(total) >= 0){
+            totalLabel.setForeground(Color.green);
+        }else{
+            totalLabel.setForeground(Color.red); 
         }
         
                 
@@ -138,14 +153,14 @@ public class View extends javax.swing.JFrame {
         }catch(Exception e){
             System.out.println(e);            // Always must return something
         }
-        totalArea.setText(total);
+        totalLabel.setText(total);
+        Font font = new Font("Arial",Font.BOLD,40);
+        totalLabel.setFont(font);
         if(Integer.parseInt(total) >= 0){
-            totalArea.setForeground(Color.green);
+            totalLabel.setForeground(Color.green);
         }else{
-            totalArea.setForeground(Color.red); 
-        }
-        
-        
+            totalLabel.setForeground(Color.red); 
+        }     
         
         
     }
@@ -171,8 +186,7 @@ public class View extends javax.swing.JFrame {
         chartPanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         historique = new javax.swing.JTextArea();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        totalArea = new javax.swing.JTextArea();
+        totalLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
@@ -271,9 +285,7 @@ public class View extends javax.swing.JFrame {
         historique.setRows(5);
         jScrollPane2.setViewportView(historique);
 
-        totalArea.setColumns(20);
-        totalArea.setRows(5);
-        jScrollPane3.setViewportView(totalArea);
+        totalLabel.setText("jLabel1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -283,22 +295,27 @@ public class View extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(mousedragged, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(credit)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(debit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(newCount)
-                                        .addGap(31, 31, 31)
-                                        .addComponent(comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 6, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(credit)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(debit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(newCount)
+                                                .addGap(31, 31, 31)
+                                                .addComponent(comboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(0, 6, Short.MAX_VALUE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(87, 87, 87)
+                                .addComponent(totalLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton5)
@@ -328,8 +345,8 @@ public class View extends javax.swing.JFrame {
                     .addComponent(chartPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(42, 42, 42)
+                        .addComponent(totalLabel)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -456,10 +473,9 @@ public class View extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel minimize;
     private javax.swing.JLabel mousedragged;
     private javax.swing.JButton newCount;
-    private javax.swing.JTextArea totalArea;
+    private javax.swing.JLabel totalLabel;
     // End of variables declaration//GEN-END:variables
 }
