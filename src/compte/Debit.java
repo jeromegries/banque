@@ -1,5 +1,6 @@
 package compte;
 
+import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -30,6 +31,50 @@ public class Debit extends javax.swing.JFrame {
     
     public void addView(View v){
         this.view = v;
+    }
+    
+    public void saveDebit(){
+        String [] debit = new String[8];
+        debit[0] = "debit";
+        debit[1] = name.getText();
+        debit[2] = amount.getText();
+        debit[3] = category.getSelectedItem().toString();
+        debit[4] = day.getText();
+        debit[5] = month.getText();
+        debit[6] = year.getText();
+        
+        String[] total = new String[8];
+        
+        try{
+            
+            BufferedReader br = new BufferedReader(new FileReader(View.url));
+            int lineNumber = 0;
+		while ((br.readLine()) != null) {   
+                     total = new Csv().readCSV(View.url, lineNumber);
+                     lineNumber++;
+		}
+            br.close();
+        }catch(Exception e){
+            
+        }
+        
+        int montant = Integer.parseInt(debit[2]);
+        int totalcourant = Integer.parseInt(total[7]);
+        int global = totalcourant-montant;
+        String global7 = Integer.toString(global);
+        debit[7] = global7;
+        
+        
+        try {
+    		  csv.credit(debit);
+    		} catch(IOException e) {
+    		    e.printStackTrace();  // or handle in some other way
+    		} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        setVisible(false);
+        this.view.refresh();
     }
 
     /**
@@ -79,6 +124,23 @@ public class Debit extends javax.swing.JFrame {
         });
 
         name.setToolTipText("");
+        name.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                nameKeyPressed(evt);
+            }
+        });
+
+        amount.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                amountKeyPressed(evt);
+            }
+        });
+
+        day.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                dayKeyPressed(evt);
+            }
+        });
 
         description.setText("Description");
 
@@ -88,7 +150,19 @@ public class Debit extends javax.swing.JFrame {
 
         date.setText("Date");
 
+        month.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                monthKeyPressed(evt);
+            }
+        });
+
         slash.setText("/");
+
+        year.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                yearKeyPressed(evt);
+            }
+        });
 
         cat.setText("Catégorie");
 
@@ -124,6 +198,11 @@ public class Debit extends javax.swing.JFrame {
         });
 
         category.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Logement / Chauffage / Eclairage", "Transport", "Alimentation", "Loisirs / Culture", "Mobiliers", "Habillements", "Santé", "Communication", "Education", "Autre" }));
+        category.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                categoryKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -206,47 +285,7 @@ public class Debit extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelMouseClicked
 
     private void saveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveMouseClicked
-        String [] debit = new String[8];
-        debit[0] = "debit";
-        debit[1] = name.getText();
-        debit[2] = amount.getText();
-        debit[3] = category.getSelectedItem().toString();
-        debit[4] = day.getText();
-        debit[5] = month.getText();
-        debit[6] = year.getText();
-        
-        String[] total = new String[8];
-        
-        try{
-            
-            BufferedReader br = new BufferedReader(new FileReader(View.url));
-            int lineNumber = 0;
-		while ((br.readLine()) != null) {   
-                     total = new Csv().readCSV(View.url, lineNumber);
-                     lineNumber++;
-		}
-            br.close();
-        }catch(Exception e){
-            
-        }
-        
-        int montant = Integer.parseInt(debit[2]);
-        int totalcourant = Integer.parseInt(total[7]);
-        int global = totalcourant-montant;
-        String global7 = Integer.toString(global);
-        debit[7] = global7;
-        
-        
-        try {
-    		  csv.credit(debit);
-    		} catch(IOException e) {
-    		    e.printStackTrace();  // or handle in some other way
-    		} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-        setVisible(false);
-        this.view.refresh();
+        this.saveDebit();
     }//GEN-LAST:event_saveMouseClicked
 
     private void minimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeMouseClicked
@@ -268,6 +307,42 @@ public class Debit extends javax.swing.JFrame {
         xMouse = evt.getX();
         yMouse = evt.getY();
     }//GEN-LAST:event_mousedraggedMousePressed
+
+    private void nameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.saveDebit();
+        }
+    }//GEN-LAST:event_nameKeyPressed
+
+    private void amountKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_amountKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.saveDebit();
+        }
+    }//GEN-LAST:event_amountKeyPressed
+
+    private void categoryKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_categoryKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.saveDebit();
+        }
+    }//GEN-LAST:event_categoryKeyPressed
+
+    private void dayKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dayKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.saveDebit();
+        }
+    }//GEN-LAST:event_dayKeyPressed
+
+    private void monthKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_monthKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.saveDebit();
+        }
+    }//GEN-LAST:event_monthKeyPressed
+
+    private void yearKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_yearKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.saveDebit();
+        }
+    }//GEN-LAST:event_yearKeyPressed
 
     /**
      * @param args the command line arguments

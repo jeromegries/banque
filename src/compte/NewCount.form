@@ -108,6 +108,9 @@
   </Layout>
   <SubComponents>
     <Component class="javax.swing.JTextField" name="name">
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="nameKeyPressed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="save">
       <Properties>
@@ -133,6 +136,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="amount">
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="amountKeyPressed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
@@ -145,6 +151,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="month">
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="monthKeyPressed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="slash">
       <Properties>
@@ -152,8 +161,14 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="year">
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="yearKeyPressed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="day">
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="dayKeyPressed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="cancel">
       <Properties>

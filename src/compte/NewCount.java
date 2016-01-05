@@ -5,6 +5,7 @@
  */
 package compte;
 
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 
 /**
@@ -29,6 +30,32 @@ public class NewCount extends javax.swing.JFrame {
     
     public void addView(View v){
         this.view = v;
+    }
+    
+    public void saveNewCount(){
+        String [] credit = new String[8];
+        credit[0] = "credit";
+        credit[1]="";
+        credit[2]= amount.getText();
+        credit[3]="";
+        credit[4] = day.getText();
+        credit[5] = month.getText();
+        credit[6] = year.getText();
+        credit[7] = amount.getText();
+        
+        String s = name.getText();
+       
+         try {
+    		  csv.newCount(s, credit);
+    		} catch(IOException e) {
+    		    e.printStackTrace();  // or handle in some other way
+    		} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        setVisible(false);
+        this.view.refresh();
+        
     }
 
     /**
@@ -59,6 +86,12 @@ public class NewCount extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
+        name.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                nameKeyPressed(evt);
+            }
+        });
+
         save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/compte/pictures/basic.png"))); // NOI18N
         save.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         save.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -71,11 +104,35 @@ public class NewCount extends javax.swing.JFrame {
 
         jLabel1.setText("Somme disponible");
 
+        amount.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                amountKeyPressed(evt);
+            }
+        });
+
         jLabel2.setText("Date de création");
 
         slash0.setText("/");
 
+        month.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                monthKeyPressed(evt);
+            }
+        });
+
         slash.setText("/");
+
+        year.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                yearKeyPressed(evt);
+            }
+        });
+
+        day.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                dayKeyPressed(evt);
+            }
+        });
 
         cancel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/compte/pictures/delete86.png"))); // NOI18N
         cancel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -190,29 +247,7 @@ public class NewCount extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void saveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveMouseClicked
-        String [] credit = new String[8];
-        credit[0] = "credit";
-        credit[1]="";
-        credit[2]= amount.getText();
-        credit[3]="";
-        credit[4] = day.getText();
-        credit[5] = month.getText();
-        credit[6] = year.getText();
-        credit[7] = amount.getText();
-        
-        String s = name.getText();
-       
-         try {
-    		  csv.newCount(s, credit);
-    		} catch(IOException e) {
-    		    e.printStackTrace();  // or handle in some other way
-    		} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-        setVisible(false);
-        this.view.refresh();
-        
+        this.saveNewCount();
     }//GEN-LAST:event_saveMouseClicked
 
     private void amountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_amountActionPerformed
@@ -244,6 +279,36 @@ public class NewCount extends javax.swing.JFrame {
         yMouse = evt.getY();
 
     }//GEN-LAST:event_mousedraggedMousePressed
+
+    private void nameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.saveNewCount();
+        }
+    }//GEN-LAST:event_nameKeyPressed
+
+    private void amountKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_amountKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.saveNewCount();
+        }
+    }//GEN-LAST:event_amountKeyPressed
+
+    private void dayKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dayKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.saveNewCount();
+        }
+    }//GEN-LAST:event_dayKeyPressed
+
+    private void monthKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_monthKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.saveNewCount();
+        }
+    }//GEN-LAST:event_monthKeyPressed
+
+    private void yearKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_yearKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.saveNewCount();
+        }
+    }//GEN-LAST:event_yearKeyPressed
 
     /**
      * @param args the command line arguments

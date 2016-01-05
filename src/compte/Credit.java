@@ -1,5 +1,6 @@
 package compte;
 
+import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -32,6 +33,53 @@ public class Credit extends javax.swing.JFrame {
     public void addView(View v){
         this.view = v;
     }
+    
+    public void saveCredit(){
+        String [] credit = new String[8];
+        credit[0] = "credit";
+        credit[1] = name.getText();
+        credit[2] = amount.getText();
+        credit[3] = category.getSelectedItem().toString();
+        credit[4] = day.getText();
+        credit[5] = month.getText();
+        credit[6] = year.getText();
+       
+        String[] total = new String[8];
+        
+        try{
+            
+            BufferedReader br = new BufferedReader(new FileReader(View.url));
+            int lineNumber = 0;
+            while ((br.readLine()) != null) {   
+                total = new Csv().readCSV(View.url, lineNumber);                 
+                lineNumber++;
+            }
+            br.close();
+                                           
+
+            
+        }catch(Exception e){
+            
+        }
+        
+        int montant = Integer.parseInt(credit[2]);
+        int totalcourant = Integer.parseInt(total[7]);
+        int global = montant + totalcourant;
+        String global7 = Integer.toString(global);
+        credit[7] = global7;
+        
+        
+        try {
+    		  csv.credit(credit);
+    		} catch(IOException e) {
+    		    e.printStackTrace();  // or handle in some other way
+    		} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        setVisible(false);
+        this.view.refresh();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -62,12 +110,22 @@ public class Credit extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                formKeyPressed(evt);
+            }
+        });
 
         save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/compte/pictures/basic.png"))); // NOI18N
         save.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         save.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 saveMouseClicked(evt);
+            }
+        });
+        save.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                saveKeyPressed(evt);
             }
         });
 
@@ -85,6 +143,23 @@ public class Credit extends javax.swing.JFrame {
                 nameActionPerformed(evt);
             }
         });
+        name.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                nameKeyPressed(evt);
+            }
+        });
+
+        amount.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                amountKeyPressed(evt);
+            }
+        });
+
+        day.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                dayKeyPressed(evt);
+            }
+        });
 
         description.setText("Description");
 
@@ -94,7 +169,19 @@ public class Credit extends javax.swing.JFrame {
 
         date.setText("Date");
 
+        month.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                monthKeyPressed(evt);
+            }
+        });
+
         slash.setText("/");
+
+        year.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                yearKeyPressed(evt);
+            }
+        });
 
         cat.setText("Catégorie");
 
@@ -130,6 +217,11 @@ public class Credit extends javax.swing.JFrame {
         });
 
         category.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Logement / Chauffage / Eclairage", "Transport", "Alimentation", "Loisirs / Culture", "Mobiliers", "Habillements", "Santé", "Communication", "Education", "Autre" }));
+        category.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                categoryKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -217,50 +309,7 @@ public class Credit extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelMouseClicked
 
     private void saveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveMouseClicked
-        String [] credit = new String[8];
-        credit[0] = "credit";
-        credit[1] = name.getText();
-        credit[2] = amount.getText();
-        credit[3] = category.getSelectedItem().toString();
-        credit[4] = day.getText();
-        credit[5] = month.getText();
-        credit[6] = year.getText();
-       
-        String[] total = new String[8];
-        
-        try{
-            
-            BufferedReader br = new BufferedReader(new FileReader(View.url));
-            int lineNumber = 0;
-            while ((br.readLine()) != null) {   
-                total = new Csv().readCSV(View.url, lineNumber);                 
-                lineNumber++;
-            }
-            br.close();
-                                           
-
-            
-        }catch(Exception e){
-            
-        }
-        
-        int montant = Integer.parseInt(credit[2]);
-        int totalcourant = Integer.parseInt(total[7]);
-        int global = montant + totalcourant;
-        String global7 = Integer.toString(global);
-        credit[7] = global7;
-        
-        
-        try {
-    		  csv.credit(credit);
-    		} catch(IOException e) {
-    		    e.printStackTrace();  // or handle in some other way
-    		} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-         setVisible(false);
-        this.view.refresh();
+        this.saveCredit();
     }//GEN-LAST:event_saveMouseClicked
 
     private void minimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeMouseClicked
@@ -282,6 +331,55 @@ public class Credit extends javax.swing.JFrame {
         xMouse = evt.getX();
         yMouse = evt.getY();
     }//GEN-LAST:event_mousedraggedMousePressed
+
+    private void saveKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_saveKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.saveCredit();
+        }
+	
+    }//GEN-LAST:event_saveKeyPressed
+
+    private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.saveCredit();
+        }
+    }//GEN-LAST:event_formKeyPressed
+
+    private void yearKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_yearKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.saveCredit();
+        }
+    }//GEN-LAST:event_yearKeyPressed
+
+    private void monthKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_monthKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.saveCredit();
+        }
+    }//GEN-LAST:event_monthKeyPressed
+
+    private void dayKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dayKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.saveCredit();
+        }
+    }//GEN-LAST:event_dayKeyPressed
+
+    private void categoryKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_categoryKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.saveCredit();
+        }
+    }//GEN-LAST:event_categoryKeyPressed
+
+    private void amountKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_amountKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.saveCredit();
+        }
+    }//GEN-LAST:event_amountKeyPressed
+
+    private void nameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER){
+            this.saveCredit();
+        }
+    }//GEN-LAST:event_nameKeyPressed
 
     /**
      * @param args the command line arguments
