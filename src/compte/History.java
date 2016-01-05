@@ -6,8 +6,9 @@
 package compte;
 
 import com.opencsv.CSVReader;
-import java.io.BufferedReader;
+import java.awt.Color;
 import java.io.FileReader;
+import javax.swing.JLabel;
 
 
 
@@ -31,9 +32,17 @@ public class History {
        while ((nextLine = reader.readNext()) != null){ numberline=numberline+1;}
       
        for(int i = 1; i<numberline; i++){
-        
+        String amount = new String();
             String[] historyline = csv.readCSV(View.url, numberline-i);
-            result = result+historyline[4]+"/"+historyline[5]+"/"+historyline[6]+"       :"+historyline[2]+"\n"+historyline[1]+"\n_____________________________\n";
+            if(historyline[0].equals("credit"))
+            {
+                amount = " +"+historyline[2];
+            }else{
+                amount = " -"+historyline[2];
+            }
+            
+            
+            result = result+" "+historyline[4]+"/"+historyline[5]+"/"+historyline[6]+"       :"+amount+"\n"+" "+historyline[1]+"\n_________________________\n";
                 
                }
        

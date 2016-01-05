@@ -21,21 +21,20 @@ public class OSValidator {
    public String osTest() {
                 String result = new String();
 		if (isWindows()) {
-                    File AppData = new File("C:/Users/"+username+"/AppData/Local");
-                    if(AppData.exists()){
-                        File fb = new File("C:/Users/"+username+"/AppData/Local/SuiviBancaire"); 
-                        fb.mkdirs();
-                        result = "C:/Users/"+username+"/AppData/Local/SuiviBancaire";
-                    }
-                    
+                    File fb = new File("C:/Users/"+username+"/AppData/Local/SuiviBancaire"); 
+                    fb.mkdirs();
+                    result = "C:/Users/"+username+"/AppData/Local/SuiviBancaire";   
                     return result;
 		} else if (isMac()) {
-			return "mac";
+                    File fb = new File(username+"/Library/Preferences/SuiviBancaire"); 
+                    fb.mkdirs();
+                    result = username+"/Library/Preferences/SuiviBancaire";
+                    return result;
 		} else if (isUnix()) {
-                        File fb = new File("/home/"+username+"/SuiviBancaire"); 
-                        fb.mkdirs();
-                        result = "/home/"+username+"/SuiviBancaire";
-			return result;
+                    File fb = new File("/home/"+username+"/SuiviBancaire"); 
+                    fb.mkdirs();
+                    result = "/home/"+username+"/SuiviBancaire";
+                    return result;
 		} else {
 			return "Your OS is not support!!";
 		}
