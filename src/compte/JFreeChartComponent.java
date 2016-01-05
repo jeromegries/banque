@@ -187,7 +187,7 @@ public class JFreeChartComponent {
                             };
                         break;
                         default:
-                            System.out.println("Erreur de saisie dans le fichier csv de type catégorie");
+                       
                     }
                     lineNumber++;
 		}

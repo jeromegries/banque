@@ -7,7 +7,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 public class Csv {
     
@@ -99,5 +98,18 @@ public class Csv {
        File[] files = new File(View.urlRep).listFiles();
        result = files.length;
        return result;
+   }
+   
+   public int LineCount(String url){
+        int lineNumber = 0;
+        try{
+            BufferedReader br = new BufferedReader(new FileReader(url));
+            while ((br.readLine()) != null) {
+               lineNumber++;
+            }
+        }catch(Exception ex){
+            
+        }
+        return lineNumber;
    }
 }

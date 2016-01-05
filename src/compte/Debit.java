@@ -223,8 +223,6 @@ public class Debit extends javax.swing.JFrame {
             int lineNumber = 0;
 		while ((br.readLine()) != null) {   
                      total = new Csv().readCSV(View.url, lineNumber);
-                            System.out.println(total[7]);
-
                      lineNumber++;
 		}
             

@@ -48,29 +48,6 @@ public class History {
        
        return result;
       }
-    
-    /*
-    public String total() throws Exception
-        {
-           
-            //Compter le nombre de lignes du fichier
-       String result = "";
-       int numberline=0;
-       
-       CSVReader reader = new CSVReader(new FileReader(View.url));
-       String [] nextLine;
-       while ((nextLine = reader.readNext()) != null){ numberline=numberline+1;}
-      
-       for(int i = 0; i<numberline; i++){
-        
-            String[] historyline = csv.readCSV(View.url, numberline-i);
-            result = result+historyline[7]+"\n";
-                
-               }
-       
-       return result;
-      }
-    */
         
     }
     
