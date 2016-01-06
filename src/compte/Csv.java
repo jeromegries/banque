@@ -98,7 +98,7 @@ public class Csv {
             e.printStackTrace();
         }
         
-        
+        // On retire les guillemets de chaque cellule (qui entoure chaque string)
         for (int j = 0; j < result.length; j++) {
             String tmp = result[j];
             result[j] = tmp.substring(1, tmp.length() - 1);
@@ -106,6 +106,8 @@ public class Csv {
         return result;
     }
 
+    // Retour un comboBoxModel composé du nom de tous les fichiers
+    // afin de pouvoir selectionner le compte sur lequel travailler
     public DefaultComboBoxModel liste() {
 
         DefaultComboBoxModel listComponent = new DefaultComboBoxModel();
@@ -120,6 +122,7 @@ public class Csv {
         return listComponent;
     }
 
+    // On récupère le nombre de compte (de fichier)
     public int fileCount() {
         
         int result = 0;
@@ -128,6 +131,7 @@ public class Csv {
         return result;
     }
 
+    // On récupère le nombre de ligne d'un fichier
     public int lineCount(String url) {
        
         int lineNumber = 0;
@@ -143,6 +147,8 @@ public class Csv {
         return lineNumber;
     }
 
+    // On récupère la ligne pour l'insertion chronologique d'une nouvelle
+    // entrée
     public int lineToWrite(String dd, String mm, String yy) {
         
         int result = 0;
@@ -169,7 +175,6 @@ public class Csv {
             }
         } catch (Exception ex) {
             System.out.println(ex);
-            System.out.println("Erreur lors du LineToWrite()");
         }
         return result;
     }
