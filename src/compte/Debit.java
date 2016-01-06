@@ -57,7 +57,7 @@ public class Debit extends javax.swing.JFrame {
         debit[7] = global7;
 
         try {
-            csv.credit(debit);
+            csv.writeCSV(debit);
         } catch (IOException e) {
             e.printStackTrace();  // or handle in some other way
         } catch (Exception e) {

@@ -17,7 +17,7 @@ public class Credit extends javax.swing.JFrame {
     private Csv csv = new Csv();
 
     /**
-     * Creates new form credit
+     * Creates new form writeCSV
      */
     public Credit() {
         initComponents();
@@ -29,7 +29,7 @@ public class Credit extends javax.swing.JFrame {
 
     public void saveCredit() {
         
-        // On insère les données enregistré par la fenètre credit dans un 
+        // On insère les données enregistré par la fenètre writeCSV dans un 
         // tableau afin d'écrire une nouvelle ligne dans notre fichier csv
         String[] credit = new String[8];
         credit[0] = "credit";
@@ -64,7 +64,7 @@ public class Credit extends javax.swing.JFrame {
         
         // On envoie notre tableau à l'écriture
         try {
-            csv.credit(credit);
+            csv.writeCSV(credit);
         } catch (IOException e) {
             e.printStackTrace();  
         } catch (Exception e) {
@@ -376,7 +376,7 @@ public class Credit extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
  
-        // Crée et affiche l'interface credit
+        // Crée et affiche l'interface writeCSV
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Credit().setVisible(true);

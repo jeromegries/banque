@@ -10,7 +10,9 @@ import java.io.FileReader;
 import javax.swing.DefaultComboBoxModel;
 
 public class Csv {
-
+    
+    // on crée le fichier qui contiendra les informations du compte à l'aide
+    // du chemin de base + du nom du compte ( s )
     public void newCount(String s, String[] t) throws Exception {
         
         String csv = View.urlRep + "/" + s + ".csv";
@@ -20,20 +22,29 @@ public class Csv {
         writer.close();
     }
 
-    public void credit(String[] t) throws Exception {
+    // On utilise un nouveau fichier temporaire pour introduire les actions
+    // antérieurs, puis la nouvelle action, puis les actions suivantes.
+    // On supprime ensuite le premier fichier et on renomme le temporaire
+    // pour retrouver le compte avec la nouvelle entrée bien triée par date
+    public void writeCSV(String[] t) throws Exception {
         
         String csv = View.url;
+        // Création du fichier temporaire
         String tmpcsv = View.urlRep + "/tmp.csv";
+        // On récupère la ligne où il faut rajouter la nouvelle entrée
         int lineToWrite = this.lineToWrite(t[4], t[5], t[6]);
         CSVWriter tmpWriter = new CSVWriter(new FileWriter(tmpcsv, true));
         int i = 0;
         int total = 0;
+        // On réécrit simplement toutes les actions antérieurs dans le tmp
         while (i != lineToWrite) {
             String[] line = this.readCSV(csv, i);
             total = Integer.parseInt(line[7]);
             tmpWriter.writeNext(line);
             i++;
         }
+        // On recalcul la valeur du total présente dans la ligne de la nouvelle 
+        // entrée (elle doit se cumulé avec le total précédant
         if (t[0].equals("credit")) {
             total = total + Integer.parseInt(t[2]);
         } else {
@@ -62,15 +73,6 @@ public class Csv {
 
     }
 
-    public void debit(String[] t) throws Exception {
-       
-        String csv = View.url;
-        CSVWriter writer = new CSVWriter(new FileWriter(csv, true));
-        String[] record = t;
-        writer.writeNext(record);
-        writer.close();
-    }
-
     public String[] readCSV(String path, int i) throws Exception {
         
         BufferedReader br = null;
@@ -83,6 +85,8 @@ public class Csv {
             int lineNumber = 0;
             while ((line = br.readLine()) != null) {
                 if (lineNumber == i) {
+                    // On décompose chaque ligne en tableau, les cellules sont
+                    // les strings entre ","
                     result = line.split(cvsSplitBy);
                 }
                 lineNumber++;
@@ -93,8 +97,9 @@ public class Csv {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-         for (int j = 0; j < result.length; j++) {
+        
+        
+        for (int j = 0; j < result.length; j++) {
             String tmp = result[j];
             result[j] = tmp.substring(1, tmp.length() - 1);
         }
