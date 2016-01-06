@@ -14,10 +14,7 @@ import org.jfree.data.time.Day;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 
-/**
- *
- * @author Fabien
- */
+
 public class JFreeChartComponent {
 
     public ChartPanel barPanel() {

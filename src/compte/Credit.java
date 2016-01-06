@@ -5,10 +5,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-/**
- *
- * @author jerome
- */
+
 public class Credit extends javax.swing.JFrame {
 
     int xMouse;
