@@ -28,6 +28,9 @@ public class Credit extends javax.swing.JFrame {
     }
 
     public void saveCredit() {
+        
+        // On insère les données enregistré par la fenètre credit dans un 
+        // tableau afin d'écrire une nouvelle ligne dans notre fichier csv
         String[] credit = new String[8];
         credit[0] = "credit";
         credit[1] = name.getText();
@@ -38,7 +41,8 @@ public class Credit extends javax.swing.JFrame {
         credit[6] = year.getText();
 
         String[] total = new String[8];
-
+        
+        // On récupère la dernière valeur du total afin d'en rajouter le montant du nouveau crédit
         try {
 
             BufferedReader br = new BufferedReader(new FileReader(View.url));
@@ -57,7 +61,8 @@ public class Credit extends javax.swing.JFrame {
         int global = montant + totalcourant;
         String global7 = Integer.toString(global);
         credit[7] = global7;
-
+        
+        // On envoie notre tableau à l'écriture
         try {
             csv.credit(credit);
         } catch (IOException e) {
@@ -65,8 +70,11 @@ public class Credit extends javax.swing.JFrame {
         } catch (Exception e) {
              e.printStackTrace();
         }
-
+        
+        // La fenètre est fermé à la fin de la création du nouveau crédit
         setVisible(false);
+        
+        // On réinitialise la fenètre principale
         this.view.refresh();
     }
 
@@ -280,15 +288,17 @@ public class Credit extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelMouseClicked
+        // La fenètre est fermé après avoir cliqué sur la croix
         setVisible(false);
     }//GEN-LAST:event_cancelMouseClicked
 
     private void saveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveMouseClicked
+        // On active l'enregistrement des nouvelles informations
         this.saveCredit();
     }//GEN-LAST:event_saveMouseClicked
 
     private void minimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeMouseClicked
-        this.setState(ICONIFIED);// TODO add your handling code here:
+        this.setState(ICONIFIED);
     }//GEN-LAST:event_minimizeMouseClicked
 
     private void closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseClicked
@@ -296,6 +306,8 @@ public class Credit extends javax.swing.JFrame {
     }//GEN-LAST:event_closeMouseClicked
 
     private void mousedraggedMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mousedraggedMouseDragged
+        
+        // Le déplacement de la fenètre se fait par le drag de la barre noir
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
 
@@ -307,6 +319,9 @@ public class Credit extends javax.swing.JFrame {
         yMouse = evt.getY();
     }//GEN-LAST:event_mousedraggedMousePressed
 
+    // L'ensemble des KeyPressed sert à valider l'enregistrement par l'appuie
+    // du bouton "enter" peu importe ou se situe l'utilisateur
+    
     private void saveKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_saveKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             this.saveCredit();
@@ -360,37 +375,8 @@ public class Credit extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Credit.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Credit.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Credit.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Credit.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
+ 
+        // Crée et affiche l'interface credit
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Credit().setVisible(true);
