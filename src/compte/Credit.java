@@ -15,6 +15,9 @@ public class Credit extends javax.swing.JFrame {
     int yMouse;
     private View view;
     private Csv csv = new Csv();
+    
+    
+    
 
     /**
      * Creates new form writeCSV
@@ -101,7 +104,6 @@ public class Credit extends javax.swing.JFrame {
         category = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
         addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 formKeyPressed(evt);
