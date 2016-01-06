@@ -1,114 +1,100 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package compte;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-
 import java.awt.Font;
 import java.awt.TextArea;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 
-
-/**
- *
- * @author jerome
- */
 public class View extends javax.swing.JFrame {
-    
+
     int xMouse;
     int yMouse;
     private Csv csv = new Csv();
     private History history = new History();
     private JFreeChartComponent chart = new JFreeChartComponent();
-    
+
     //Url des fichiers Csv
     public static String urlRep = new String();
     public static String url = new String();
     private String ItemSelected = new String();
-    
-    
+
     public View() {
-        
+
         initComponents();
-        
+
         OSValidator osTester = new OSValidator();
         urlRep = osTester.osTest();
-        
+
         comboBox.setModel(csv.liste());
         String g = new String();
-        if(csv.FileCount() != 0){
+        if (csv.FileCount() != 0) {
             g = comboBox.getSelectedItem().toString();
-            url = urlRep+"/"+g;
+            url = urlRep + "/" + g;
             String total = "";
-            try{
+            try {
 
                 BufferedReader br = new BufferedReader(new FileReader(View.url));
                 int lineNumber = 0;
-                while ((br.readLine()) != null) {   
+                while ((br.readLine()) != null) {
                     String[] line = new Csv().readCSV(View.url, lineNumber);
                     total = line[7];
                     lineNumber++;
                 }
                 br.close();
 
-            }catch(Exception e){
+            } catch (Exception e) {
                 System.out.println(e);            // Always must return something
             }
             totalLabel.setText(total);
-            Font font = new Font("Arial",Font.BOLD,40);
+            Font font = new Font("Arial", Font.BOLD, 40);
             totalLabel.setFont(font);
-            if(Integer.parseInt(total) >= 0){
+            if (Integer.parseInt(total) >= 0) {
                 totalLabel.setForeground(Color.green);
-            }else{
-                totalLabel.setForeground(Color.red); 
+            } else {
+                totalLabel.setForeground(Color.red);
             }
         }
-        
-        try{
-                   
+
+        try {
+
             TextArea text = new TextArea();
             text.setText(history.affichehistory());
- 
+
             historique.setLayout(new BorderLayout());
             historique.add(text, BorderLayout.CENTER);
             historique.validate();
-             
-             }catch(Exception e){
-           }
-        
-        
+
+        } catch (Exception e) {
+        }
+
         File testFile = new File(url);
-        if(testFile.exists()){
+        if (testFile.exists()) {
             chartPanel.removeAll();
             chartPanel.setLayout(new BorderLayout());
             chartPanel.add(chart.GraphPanel(), BorderLayout.CENTER);
             chartPanel.validate();
-        }      
-                
-       
         }
-    
-    public void refresh(){
-        if(csv.FileCount() == 0){
-            System.out.println("On est rentré dans le refresh, puis dans la boucle traitant les cas sans fichier de compte");
+
+    }
+
+    public void refresh() {
+        if (csv.FileCount() == 0) {
+            
             comboBox.setModel(csv.liste());
-            
+
             chartPanel.removeAll();
-            
+
             historique.removeAll();
-            
+
             totalLabel.setText("");
-        }else{
+        } else {
             comboBox.setModel(csv.liste());
             int selectedIndex = 0;
-            for(int i = 0; i < comboBox.getItemCount(); i++){
-                if(comboBox.getItemAt(i).equalsIgnoreCase(ItemSelected)){
+            for (int i = 0; i < comboBox.getItemCount(); i++) {
+                if (comboBox.getItemAt(i).equalsIgnoreCase(ItemSelected)) {
                     selectedIndex = i;
                 }
             }
@@ -117,57 +103,52 @@ public class View extends javax.swing.JFrame {
             comboBox.setSelectedIndex(selectedIndex);
             this.comboBox.repaint();
 
-            if(testFile.exists()){
+            if (testFile.exists()) {
                 chartPanel.removeAll();
                 chartPanel.setLayout(new BorderLayout());
                 chartPanel.add(chart.GraphPanel(), BorderLayout.CENTER);
                 chartPanel.validate();
 
-                try{
-                TextArea text = new TextArea();
-                text.setText(history.affichehistory());
+                try {
+                    TextArea text = new TextArea();
+                    text.setText(history.affichehistory());
 
-                historique.removeAll();
-                historique.setLayout(new BorderLayout());
-                historique.add(text, BorderLayout.CENTER);
-                historique.validate();
+                    historique.removeAll();
+                    historique.setLayout(new BorderLayout());
+                    historique.add(text, BorderLayout.CENTER);
+                    historique.validate();
 
-                }catch(Exception e){
+                } catch (Exception e) {
                 }
 
                 // On S'occupe de l'affichage du Total en couleur
                 String total = "";
-                try{
+                try {
 
                     BufferedReader br = new BufferedReader(new FileReader(View.url));
                     int lineNumber = 0;
-                    while ((br.readLine()) != null) {   
+                    while ((br.readLine()) != null) {
                         String[] line = new Csv().readCSV(View.url, lineNumber);
                         total = line[7];
                         lineNumber++;
                     }
                     br.close();
-                }catch(Exception e){
+                } catch (Exception e) {
                     System.out.println(e);
                 }
                 totalLabel.setText(total);
-                Font font = new Font("Arial",Font.BOLD,40);
+                Font font = new Font("Arial", Font.BOLD, 40);
                 totalLabel.setFont(font);
-                if(Integer.parseInt(total) >= 0){
+                if (Integer.parseInt(total) >= 0) {
                     totalLabel.setForeground(Color.green);
-                }else{
-                    totalLabel.setForeground(Color.red); 
+                } else {
+                    totalLabel.setForeground(Color.red);
                 }
             }
         }
-                
+
     }
 
-    /**
-     * This method is called from within the constructor to initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is always
-     * regenerated by the Form Editor.
-     */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -373,29 +354,29 @@ public class View extends javax.swing.JFrame {
     }//GEN-LAST:event_newCountActionPerformed
 
     private void minimizeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimizeMouseClicked
-        this.setState(ICONIFIED);// TODO add your handling code here:
+        this.setState(ICONIFIED);
     }//GEN-LAST:event_minimizeMouseClicked
 
     private void closeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeMouseClicked
-        System.exit(0);        // TODO add your handling code here:
+        System.exit(0);       
     }//GEN-LAST:event_closeMouseClicked
 
     private void mousedraggedMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mousedraggedMouseDragged
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
-        
-        this.setLocation(x-xMouse, y-yMouse);
-        
+
+        this.setLocation(x - xMouse, y - yMouse);
+
     }//GEN-LAST:event_mousedraggedMouseDragged
 
     private void mousedraggedMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mousedraggedMousePressed
         xMouse = evt.getX();
         yMouse = evt.getY();
-        
+
     }//GEN-LAST:event_mousedraggedMousePressed
 
     private void creditMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_creditMouseClicked
-        Credit credit = new Credit(); 
+        Credit credit = new Credit();
         credit.setVisible(true);
         credit.addView(this);
     }//GEN-LAST:event_creditMouseClicked
@@ -404,7 +385,7 @@ public class View extends javax.swing.JFrame {
         NewCount newCount = new NewCount();
         newCount.setVisible(true);
         newCount.addView(this);
-                            
+
     }//GEN-LAST:event_newCountMouseClicked
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -416,12 +397,12 @@ public class View extends javax.swing.JFrame {
 
     private void comboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxActionPerformed
         ItemSelected = comboBox.getSelectedItem().toString();
-        url = urlRep+"/"+ItemSelected;
+        url = urlRep + "/" + ItemSelected;
         this.refresh();
     }//GEN-LAST:event_comboBoxActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-       this.refresh();
+        this.refresh();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void debitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_debitMouseClicked
@@ -432,16 +413,12 @@ public class View extends javax.swing.JFrame {
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         File account = new File(url);
-        while(account.isFile()){
+        while (account.isFile()) {
             account.delete();
         }
         this.refresh();
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
-    
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
