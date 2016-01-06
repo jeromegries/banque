@@ -30,7 +30,7 @@ public class View extends javax.swing.JFrame {
 
         comboBox.setModel(csv.liste());
         String g = new String();
-        if (csv.FileCount() != 0) {
+        if (csv.fileCount() != 0) {
             g = comboBox.getSelectedItem().toString();
             url = urlRep + "/" + g;
             String total = "";
@@ -74,14 +74,14 @@ public class View extends javax.swing.JFrame {
         if (testFile.exists()) {
             chartPanel.removeAll();
             chartPanel.setLayout(new BorderLayout());
-            chartPanel.add(chart.GraphPanel(), BorderLayout.CENTER);
+            chartPanel.add(chart.graphPanel(), BorderLayout.CENTER);
             chartPanel.validate();
         }
 
     }
 
     public void refresh() {
-        if (csv.FileCount() == 0) {
+        if (csv.fileCount() == 0) {
             
             comboBox.setModel(csv.liste());
 
@@ -106,7 +106,7 @@ public class View extends javax.swing.JFrame {
             if (testFile.exists()) {
                 chartPanel.removeAll();
                 chartPanel.setLayout(new BorderLayout());
-                chartPanel.add(chart.GraphPanel(), BorderLayout.CENTER);
+                chartPanel.add(chart.graphPanel(), BorderLayout.CENTER);
                 chartPanel.validate();
 
                 try {
@@ -391,7 +391,7 @@ public class View extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         chartPanel.removeAll();
         chartPanel.setLayout(new BorderLayout());
-        chartPanel.add(chart.PiePanel(), BorderLayout.CENTER);
+        chartPanel.add(chart.piePanel(), BorderLayout.CENTER);
         chartPanel.validate();
     }//GEN-LAST:event_jButton5ActionPerformed
 

@@ -24,7 +24,7 @@ public class Csv {
         
         String csv = View.url;
         String tmpcsv = View.urlRep + "/tmp.csv";
-        int lineToWrite = this.LineToWrite(t[4], t[5], t[6]);
+        int lineToWrite = this.lineToWrite(t[4], t[5], t[6]);
         CSVWriter tmpWriter = new CSVWriter(new FileWriter(tmpcsv, true));
         int i = 0;
         int total = 0;
@@ -41,7 +41,7 @@ public class Csv {
         }
         t[7] = Integer.toString(total);
         tmpWriter.writeNext(t);
-        while (i <= this.LineCount(csv) - 1) {
+        while (i <= this.lineCount(csv) - 1) {
             String[] line = this.readCSV(csv, i);
             if (line[0].equals("credit")) {
                 total = total + Integer.parseInt(line[2]);
@@ -115,7 +115,7 @@ public class Csv {
         return listComponent;
     }
 
-    public int FileCount() {
+    public int fileCount() {
         
         int result = 0;
         File[] files = new File(View.urlRep).listFiles();
@@ -123,7 +123,7 @@ public class Csv {
         return result;
     }
 
-    public int LineCount(String url) {
+    public int lineCount(String url) {
        
         int lineNumber = 0;
         try {
@@ -138,7 +138,7 @@ public class Csv {
         return lineNumber;
     }
 
-    public int LineToWrite(String dd, String mm, String yy) {
+    public int lineToWrite(String dd, String mm, String yy) {
         
         int result = 0;
         

@@ -20,7 +20,7 @@ import org.jfree.data.time.TimeSeriesCollection;
  */
 public class JFreeChartComponent {
 
-    public ChartPanel BarPanel() {
+    public ChartPanel barPanel() {
         DefaultCategoryDataset barChartData = new DefaultCategoryDataset();
 
         barChartData.setValue(20000, "Contribution Amount", "January");
@@ -35,7 +35,7 @@ public class JFreeChartComponent {
         return barPanel;
     }
 
-    public ChartPanel GraphPanel() {
+    public ChartPanel graphPanel() {
         TimeSeries Amount = new TimeSeries("Contribution Amount", Day.class);
         try {
 
@@ -67,7 +67,7 @@ public class JFreeChartComponent {
         return graphPanel;
     }
 
-    public ChartPanel PiePanel() {
+    public ChartPanel piePanel() {
         DefaultPieDataset pieChartData = new DefaultPieDataset();
 
         int categoriesAmount[] = new int[10];
