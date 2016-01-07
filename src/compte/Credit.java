@@ -5,10 +5,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-/**
- *
- * @author jerome
- */
 public class Credit extends javax.swing.JFrame {
 
     int xMouse;
@@ -16,9 +12,6 @@ public class Credit extends javax.swing.JFrame {
     private View view;
     private Csv csv = new Csv();
 
-    /**
-     * Creates new form writeCSV
-     */
     public Credit() {
         initComponents();
     }
@@ -42,7 +35,8 @@ public class Credit extends javax.swing.JFrame {
 
         String[] total = new String[8];
         
-        // On récupère la dernière valeur du total afin d'en rajouter le montant du nouveau crédit
+        // On récupère la dernière valeur du total afin d'en rajouter 
+        // le montant du nouveau crédit
         try {
 
             BufferedReader br = new BufferedReader(new FileReader(View.url));
@@ -288,12 +282,10 @@ public class Credit extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cancelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelMouseClicked
-        // La fenètre est fermé après avoir cliqué sur la croix
         setVisible(false);
     }//GEN-LAST:event_cancelMouseClicked
 
     private void saveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveMouseClicked
-        // On active l'enregistrement des nouvelles informations
         this.saveCredit();
     }//GEN-LAST:event_saveMouseClicked
 
@@ -307,7 +299,6 @@ public class Credit extends javax.swing.JFrame {
 
     private void mousedraggedMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mousedraggedMouseDragged
         
-        // Le déplacement de la fenètre se fait par le drag de la barre noir
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
 
@@ -371,12 +362,9 @@ public class Credit extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_nameKeyPressed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
  
-        // Crée et affiche l'interface writeCSV
+        // Crée et affiche l'interface Credit
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Credit().setVisible(true);

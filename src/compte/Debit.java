@@ -5,10 +5,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-/**
- *
- * @author jerome
- */
 public class Debit extends javax.swing.JFrame {
 
     int xMouse;
@@ -26,6 +22,8 @@ public class Debit extends javax.swing.JFrame {
 
     public void saveDebit() {
 
+        // On insère les données enregistré par la fenètre writeCSV dans un 
+        // tableau afin d'écrire une nouvelle ligne dans notre fichier csv
         String[] debit = new String[8];
         debit[0] = "debit";
         debit[1] = name.getText();
@@ -36,7 +34,9 @@ public class Debit extends javax.swing.JFrame {
         debit[6] = year.getText();
 
         String[] total = new String[8];
-
+        
+        // On récupère la dernière valeur du total afin d'en rajouter 
+        // le montant du nouveau crédit
         try {
 
             BufferedReader br = new BufferedReader(new FileReader(View.url));
@@ -56,16 +56,19 @@ public class Debit extends javax.swing.JFrame {
         String global7 = Integer.toString(global);
         debit[7] = global7;
 
+        // On envoie notre tableau à l'écriture
         try {
             csv.writeCSV(debit);
         } catch (IOException e) {
-            e.printStackTrace();  // or handle in some other way
+            e.printStackTrace();
         } catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         
+        // La fenètre est fermé à la fin de la création du nouveau crédit
         setVisible(false);
+        
+        // On réinitialise la fenètre principale
         this.view.refresh();
     }
 
@@ -296,6 +299,9 @@ public class Debit extends javax.swing.JFrame {
         yMouse = evt.getY();
     }//GEN-LAST:event_mousedraggedMousePressed
 
+    // L'ensemble des KeyPressed sert à valider l'enregistrement par l'appuie
+    // du bouton "enter" peu importe ou se situe l'utilisateur
+    
     private void nameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameKeyPressed
         
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -338,11 +344,9 @@ public class Debit extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_yearKeyPressed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         
+        // Crée et affiche l'interface Debit
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Debit().setVisible(true);

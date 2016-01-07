@@ -10,7 +10,9 @@ public class History {
     private Csv csv = new Csv();
 
     public String affichehistory() throws Exception {
-        //Compter le nombre de lignes du fichier
+        
+        //Compter le nombre de lignes du fichier pour connaitre le 
+        // nombre d'évènement a afficher dans l'historique
         String result = "";
         int numberline = 0;
 
@@ -21,6 +23,9 @@ public class History {
             numberline = numberline + 1;
         }
 
+        // On met en forme l'affichage des informations
+        // Date : montant
+        // Description
         for (int i = 1; i < numberline; i++) {
             String amount = new String();
             String[] historyline = csv.readCSV(View.url, numberline - i);

@@ -18,7 +18,12 @@ public class NewCount extends javax.swing.JFrame {
         this.view = v;
     }
 
+    
     public void saveNewCount() {
+        
+        // On insère les données enregistré par la fenètre writeCSV dans un 
+        // tableau afin d'écrire une nouvelle ligne dans notre fichier csv
+        
         String[] credit = new String[8];
         credit[0] = "credit";
         credit[1] = "";
@@ -38,7 +43,10 @@ public class NewCount extends javax.swing.JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        // La fenètre est fermé à la fin de la création du nouveau crédit
         setVisible(false);
+        
+        // On réinitialise la fenètre principale
         this.view.refresh();
 
     }
@@ -260,6 +268,9 @@ public class NewCount extends javax.swing.JFrame {
 
     }//GEN-LAST:event_mousedraggedMousePressed
 
+    // L'ensemble des KeyPressed sert à valider l'enregistrement par l'appuie
+    // du bouton "enter" peu importe ou se situe l'utilisateur
+    
     private void nameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             this.saveNewCount();
@@ -290,35 +301,9 @@ public class NewCount extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_yearKeyPressed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NewCount.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NewCount.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NewCount.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NewCount.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
+        
+        // Crée et affiche l'interface NewCount
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new NewCount().setVisible(true);

@@ -4,9 +4,11 @@ import java.io.File;
 
 public class OSValidator {
 
+    // On récupère l'OS et le nom d'utilisateur pour créer le dossier de sauvegarde
     private String OS = System.getProperty("os.name").toLowerCase();
     private String username = System.getProperty("user.name");
 
+    // A partir de l'OS on définit le chemin d'accès
     public String osTest() {
         String result = new String();
         if (isWindows()) {

@@ -19,21 +19,29 @@ public class View extends javax.swing.JFrame {
     //Url des fichiers Csv
     public static String urlRep = new String();
     public static String url = new String();
+    
+    // Compte selectionné dans la combobox
     private String ItemSelected = new String();
 
     public View() {
 
         initComponents();
 
+        // On récupère le chemin d'accès au dossier qui contiendra les fichiers de sauvegarde
         OSValidator osTester = new OSValidator();
         urlRep = osTester.osTest();
 
+        // La liste déroulante est remplis par les noms des comtpes existant
         comboBox.setModel(csv.liste());
         String g = new String();
+                
+        // On affiche le total uniquement si au moins un compte existe
         if (csv.fileCount() != 0) {
             g = comboBox.getSelectedItem().toString();
             url = urlRep + "/" + g;
             String total = "";
+            
+            // On récupère le dernier total calculé
             try {
 
                 BufferedReader br = new BufferedReader(new FileReader(View.url));
@@ -46,11 +54,13 @@ public class View extends javax.swing.JFrame {
                 br.close();
 
             } catch (Exception e) {
-                System.out.println(e);            // Always must return something
+                System.out.println(e);
             }
             totalLabel.setText(total);
             Font font = new Font("Arial", Font.BOLD, 40);
             totalLabel.setFont(font);
+            
+            // En fonction de si le total est positif ou non on change sa couleur
             if (Integer.parseInt(total) >= 0) {
                 totalLabel.setForeground(Color.green);
             } else {
@@ -58,6 +68,7 @@ public class View extends javax.swing.JFrame {
             }
         }
 
+        // On remplis la partie historique avec les données existant du compte ouvert
         try {
 
             TextArea text = new TextArea();
@@ -69,7 +80,8 @@ public class View extends javax.swing.JFrame {
 
         } catch (Exception e) {
         }
-
+        
+        // On remplis le graphe
         File testFile = new File(url);
         if (testFile.exists()) {
             chartPanel.removeAll();
@@ -79,8 +91,10 @@ public class View extends javax.swing.JFrame {
         }
 
     }
-
+    
     public void refresh() {
+        
+        // Si aucun fichier n'a été detecté alors tout l'affichage est remis à zero
         if (csv.fileCount() == 0) {
             
             comboBox.setModel(csv.liste());
@@ -91,7 +105,10 @@ public class View extends javax.swing.JFrame {
 
             totalLabel.setText("");
         } else {
+            // La combobox est remise à jour
             comboBox.setModel(csv.liste());
+            
+            // On récupère le numéro du compte selectionné dans la combobox
             int selectedIndex = 0;
             for (int i = 0; i < comboBox.getItemCount(); i++) {
                 if (comboBox.getItemAt(i).equalsIgnoreCase(ItemSelected)) {
@@ -99,10 +116,14 @@ public class View extends javax.swing.JFrame {
                 }
             }
             File testFile = new File(url);
-
+            // On affiche le compte selectionné en premier dans la liste
             comboBox.setSelectedIndex(selectedIndex);
             this.comboBox.repaint();
 
+            // Si le fichier du compte selectionné existe on affiche :
+            // Le graphe 
+            // L'historique
+            // Le total
             if (testFile.exists()) {
                 chartPanel.removeAll();
                 chartPanel.setLayout(new BorderLayout());
@@ -121,7 +142,7 @@ public class View extends javax.swing.JFrame {
                 } catch (Exception e) {
                 }
 
-                // On S'occupe de l'affichage du Total en couleur
+                // On s'occupe de l'affichage du Total en couleur
                 String total = "";
                 try {
 
